@@ -1,0 +1,17 @@
+<main class="content">
+
+  <header class="header">
+    <h1>Katalog</h1>
+  </header>
+
+  <section class="zone">
+    <button class="button" (click)="import()">Paste Produkt IDs</button>
+  </section>
+
+  <section class="list" *ngIf="start">
+    <ul class="products">
+      <li *ngFor="let product of products">{{ product.id }}</li>
+    </ul>
+  </section>
+
+</main>
