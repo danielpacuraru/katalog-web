@@ -5,3 +5,9 @@ export interface Product {
   docUrl: string,
   manufacturer: string
 }
+
+export interface ProductBox {
+  id: string,
+  status: string,
+  data: Product | null
+}

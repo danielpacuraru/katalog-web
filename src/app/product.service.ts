@@ -16,4 +16,8 @@ export class ProductService {
     return this.http.get<Product>(`${environment.apiUrl}/product/${id}`);
   }
 
+  public getProductDoc(): Observable<void> {
+    return this.http.get<void>(`${environment.apiUrl}/product/123/doc`);
+  }
+
 }

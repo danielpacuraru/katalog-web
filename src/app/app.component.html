@@ -6,11 +6,32 @@
 
   <section class="zone">
     <button class="button" (click)="import()">Paste Produkt IDs</button>
+    <button class="button" (click)="download()">Download FDV</button>
   </section>
 
   <section class="list" *ngIf="start">
     <ul class="products">
-      <li *ngFor="let product of products">{{ product.id }}</li>
+      <li *ngFor="let product of products">
+        <div class="product" *ngIf="product.status === 'SUCCESS' && product.data">
+          <div class="product-head">
+            <img [src]="product.data.imageUrl">
+          </div>
+          <div class="product-body">
+            <h2>{{ product.data.name }}</h2>
+            <p>{{ product.data.id }}</p>
+            <p>{{ product.data.manufacturer }}</p>
+          </div>
+        </div>
+        <div class="product loader" *ngIf="product.status === 'QUEUE'">
+          <div class="product-head">
+          </div>
+          <div class="product-body">
+            <h2>{{ product.id }}</h2>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+          </div>
+        </div>
+      </li>
     </ul>
   </section>
 
