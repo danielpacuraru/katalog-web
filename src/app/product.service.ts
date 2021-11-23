@@ -16,8 +16,12 @@ export class ProductService {
     return this.http.get<Product>(`${environment.apiUrl}/product/${id}`);
   }
 
-  public getProductDoc(): Observable<void> {
-    return this.http.get<void>(`${environment.apiUrl}/product/123/doc`);
+  public getProductDoc(id: string): Observable<void> {
+    return this.http.get<void>(`${environment.apiUrl}/product/${id}/doc`);
+  }
+
+  public getKatalog(ids: string[]): Observable<void> {
+    return this.http.get<void>(`${environment.apiUrl}/katalog`);
   }
 
 }

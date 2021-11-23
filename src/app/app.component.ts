@@ -37,7 +37,7 @@ export class AppComponent {
       id: '2020026',
       status: 'SUCCESS',
       data: {
-        docUrl: 'https://efobasen.efo.no/API/Produktfiler/LastNed?id=1238802',
+        docUrl: 'http://localhost:3000/product/123/doc',
         id: '2020026',
         imageUrl: 'https://efobasen.efo.no/API/Produktfiler/Skalert/2020026.jpg?id=1238803&w=1000&h=1000&m=3',
         manufacturer: 'Procab AS',
@@ -45,7 +45,7 @@ export class AppComponent {
       }
     }
   ];
-  public start: boolean = true;
+  public start: boolean = false;
 
   constructor(
     private productService: ProductService
@@ -59,10 +59,35 @@ export class AppComponent {
     this._runProductQueue();
   }
 
-  public download(): void {
+  public paste(): void {
+    navigator.clipboard.readText()
+      .then(text => this._readIds(text))
+      .catch(error => console.error('Cannot read clipboard text: ', error));
+  }
+
+  private _readIds(text: string): string[] {
+    const ids = text.split('\n').filter(id => id.trim() != '');
+    console.log(ids);
+    return ids;
+  }
+
+  public download(id: string): void {
     this.productService
-      .getProductDoc()
+      .getProductDoc(id)
       .subscribe();
+  }
+
+  public katalog(): void {
+    const ids: string[] = this.products.map(p => p.id);
+    console.log(ids);
+
+    this.productService
+      .getKatalog(ids)
+      .subscribe();
+  }
+
+  public docUrl(id: string): string {
+    return `http://localhost:3000/product/${id}/doc`;
   }
 
   private _runProductQueue(): void {

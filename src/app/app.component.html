@@ -4,9 +4,9 @@
     <h1>Katalog</h1>
   </header>
 
-  <section class="zone">
-    <button class="button" (click)="import()">Paste Produkt IDs</button>
-    <button class="button" (click)="download()">Download FDV</button>
+  <section class="zone" *ngIf="!start">
+    <h2>Copy your product IDs and Paste them in here</h2>
+    <button class="button primary" (click)="paste()">Paste Product IDs</button>
   </section>
 
   <section class="list" *ngIf="start">
@@ -20,6 +20,8 @@
             <h2>{{ product.data.name }}</h2>
             <p>{{ product.data.id }}</p>
             <p>{{ product.data.manufacturer }}</p>
+            <!-- <button (click)="download(product.id)">Download FDV</button> -->
+            <a [href]="docUrl(product.id)">Download FDV</a>
           </div>
         </div>
         <div class="product loader" *ngIf="product.status === 'QUEUE'">

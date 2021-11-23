@@ -21,9 +21,8 @@ body {
 }
 
 .button {
-  background: #EEF0F0;
-  padding: 6px 16px;
-  border: 1px solid black;
+  background: #383C3E;
+  padding: 8px 20px;
   border-radius: 3px;
   display: inline-block;
   vertical-align: middle;
@@ -31,7 +30,11 @@ body {
   user-select: none;
   font-size: 14px;
   line-height: 20px;
-  color: grey;
+  color: white;
+}
+
+.button.primary {
+  background: #655AA8;
 }
 
 @keyframes anim-rotate {
@@ -40,14 +43,24 @@ body {
 }
 
 .header {
-  padding: 12px 0;
+  padding: 20px 0;
 }
 
 .zone {
+  background: fade(#DFDFF4, 50%);
   width: 100%;
-  height: 200px;
-  border: 2px dashed purple;
+  padding: 50px;
+  border: 1px dashed #655AA8;
   box-sizing: border-box;
+  text-align: center;
+}
+
+.zone h2 {
+  margin-bottom: 20px;
+  font-weight: normal;
+  font-size: 24px;
+  lien-height: 36px;
+  color: #655AA8;
 }
 
 .list {
@@ -70,10 +83,14 @@ body {
   margin-left: 0;
 }
 
+.products li:nth-child(-n+4) {
+  margin-top: 0;
+}
+
 .product {
-  background: #F0F8FB;
+  background: fade(#E2F1F8, 50%);
   width: 100%;
-  border: 3px dashed #2DA3C3;
+  border: 1px solid #2DA3C3;
   box-sizing: border-box;
 }
 
@@ -119,7 +136,7 @@ body {
   content: '';
   width: 100px;
   height: 100px;
-  border: 3px solid #2DA3C3;
+  border: 2px solid #78CCE5;
   border-left-color: transparent;
   border-right-color: transparent;
   border-radius: 50%;
