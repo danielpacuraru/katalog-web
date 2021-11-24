@@ -16,8 +16,8 @@ export class ProductService {
     return this.http.get<Product>(`${environment.apiUrl}/product/${id}`);
   }
 
-  public getProductDoc(id: string): Observable<void> {
-    return this.http.get<void>(`${environment.apiUrl}/product/${id}/doc`);
+  public getProductDoc(id: string): Observable<Blob> {
+    return this.http.get<Blob>(`${environment.apiUrl}/product/${id}/doc`, { responseType: 'blob' as 'json' });
   }
 
   public getKatalog(ids: string[]): Observable<void> {

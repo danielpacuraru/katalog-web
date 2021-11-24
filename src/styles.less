@@ -37,6 +37,10 @@ body {
   background: #655AA8;
 }
 
+.button.success {
+  background: #4DB142;
+}
+
 @keyframes anim-rotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -92,6 +96,7 @@ body {
   width: 100%;
   border: 1px solid #2DA3C3;
   box-sizing: border-box;
+  position: relative;
 }
 
 .product-head {
@@ -132,6 +137,12 @@ body {
   text-overflow: ellipsis;
 }
 
+.product-body .button {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+}
+
 .product.loader .product-head:after {
   content: '';
   width: 100px;
@@ -153,7 +164,11 @@ body {
   text-align: center;
 }
 
-
+.product.error {
+  background: fade(#F8E4E7, 50%);
+  border-color: #D6364E;
+  text-align: center;
+}
 
 
 

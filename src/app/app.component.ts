@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as FileSaver from 'file-saver';
 
 import { ProductService } from './product.service';
 import { Product, ProductBox } from './product';
@@ -51,46 +52,40 @@ export class AppComponent {
     private productService: ProductService
   ) { }
 
-  public import(): void {
-    const ids: string[] = ['8001115', '2020061', '2020042', '2020026', '3224042', '1606114', '3224173', '3224127', '3224044', '6407219', '8802985'];
-    for(let id of ids) this.products.push({ id, status: 'QUEUE', data: null });
-    console.log(this.products);
-    this.start = true;
-    this._runProductQueue();
-  }
-
   public paste(): void {
     navigator.clipboard.readText()
-      .then(text => this._readIds(text))
+      .then(text => this._addIdsAndStartQueue(text))
       .catch(error => console.error('Cannot read clipboard text: ', error));
-  }
-
-  private _readIds(text: string): string[] {
-    const ids = text.split('\n').filter(id => id.trim() != '');
-    console.log(ids);
-    return ids;
   }
 
   public download(id: string): void {
     this.productService
       .getProductDoc(id)
-      .subscribe();
+      .subscribe((data: Blob) => {
+        const product = this.products.find(p => p.id === id);
+        if(product?.data) {
+          const fileBlob: Blob = new Blob([data], { type: 'application/pdf' });
+          const fileName = `${product.data.id}_${product.data.name}.pdf`;
+          FileSaver.saveAs(fileBlob, fileName);
+        }
+      });
   }
 
-  public katalog(): void {
-    const ids: string[] = this.products.map(p => p.id);
-    console.log(ids);
-
-    this.productService
-      .getKatalog(ids)
-      .subscribe();
+  private _addIdsAndStartQueue(text: string): void {
+    this._addIds(text);
+    this._startQueue();
+    this.start = true;
   }
 
-  public docUrl(id: string): string {
-    return `http://localhost:3000/product/${id}/doc`;
+  private _addIds(text: string): void {
+    const ids: string[] = text.split('\n').filter(id => id.trim() != '');
+
+    for(let id of ids) {
+      this.products.push({ id, status: 'QUEUE', data: null });
+    }
   }
 
-  private _runProductQueue(): void {
+  private _startQueue(): void {
     let nextProduct = this.products.find(p => p.status === 'QUEUE');
 
     if(!nextProduct) return;
@@ -98,12 +93,16 @@ export class AppComponent {
     this.productService
       .getProduct(nextProduct.id)
       .subscribe((product: Product) => {
-        console.log(product);
         if(nextProduct) {
           nextProduct.data = product;
           nextProduct.status = 'SUCCESS';
         }
-        this._runProductQueue();
+        this._startQueue();
+      }, () => {
+        if(nextProduct) {
+          nextProduct.status = 'ERROR';
+        }
+        this._startQueue();
       });
   }
 
