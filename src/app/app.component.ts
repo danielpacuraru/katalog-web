@@ -11,41 +11,7 @@ import { Product, ProductBox } from './product';
 })
 export class AppComponent {
 
-  public products: ProductBox[] = [
-    {
-      id: '2020061',
-      status: 'SUCCESS',
-      data: {
-        docUrl: 'https://efobasen.efo.no/API/Produktfiler/LastNed?id=1057723',
-        id: '2020061',
-        imageUrl: 'https://efobasen.efo.no/API/Produktfiler/Skalert/2020061.jpg?id=30426&w=1000&h=1000&m=3',
-        manufacturer: 'Cembre',
-        name: 'Dyp-presstang HN5'
-      }
-    },
-    {
-      id: '2020042',
-      status: 'SUCCESS',
-      data: {
-        docUrl: 'https://efobasen.efo.no/API/Produktfiler/LastNed?id=1057728',
-        id: '2020042',
-        imageUrl: 'https://efobasen.efo.no/API/Produktfiler/Skalert/2020042.jpg?id=27102&w=1000&h=1000&m=3',
-        manufacturer: 'Procab AS',
-        name: 'C-press klemme C25-C25'
-      }
-    },
-    {
-      id: '2020026',
-      status: 'SUCCESS',
-      data: {
-        docUrl: 'http://localhost:3000/product/123/doc',
-        id: '2020026',
-        imageUrl: 'https://efobasen.efo.no/API/Produktfiler/Skalert/2020026.jpg?id=1238803&w=1000&h=1000&m=3',
-        manufacturer: 'Procab AS',
-        name: 'Skjøtehylse skru M 16-95'
-      }
-    }
-  ];
+  public products: ProductBox[] = [];
   public start: boolean = false;
 
   constructor(
@@ -69,6 +35,14 @@ export class AppComponent {
           FileSaver.saveAs(fileBlob, fileName);
         }
       });
+  }
+
+  public katalog(): void {
+    const list: string[] = this.products.filter(p => p.status === 'SUCCESS').map(p => p.id);
+
+    this.productService
+      .getCatalog(list)
+      .subscribe();
   }
 
   private _addIdsAndStartQueue(text: string): void {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 
@@ -20,8 +20,9 @@ export class ProductService {
     return this.http.get<Blob>(`${environment.apiUrl}/product/${id}/doc`, { responseType: 'blob' as 'json' });
   }
 
-  public getKatalog(ids: string[]): Observable<void> {
-    return this.http.get<void>(`${environment.apiUrl}/katalog`);
+  public getCatalog(list: string[]): Observable<void> {
+    const params = new HttpParams().set('list', list.join());
+    return this.http.get<void>(`${environment.apiUrl}/catalog`, { params: params });
   }
 
 }
