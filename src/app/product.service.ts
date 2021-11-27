@@ -20,9 +20,9 @@ export class ProductService {
     return this.http.get<Blob>(`${environment.apiUrl}/product/${id}/doc`, { responseType: 'blob' as 'json' });
   }
 
-  public getCatalog(list: string[]): Observable<void> {
+  public getCatalog(list: string[]): Observable<Blob> {
     const params = new HttpParams().set('list', list.join());
-    return this.http.get<void>(`${environment.apiUrl}/catalog`, { params: params });
+    return this.http.get<Blob>(`${environment.apiUrl}/catalog`, { params: params, responseType: 'blob' as 'json' });
   }
 
 }

@@ -42,7 +42,11 @@ export class AppComponent {
 
     this.productService
       .getCatalog(list)
-      .subscribe();
+      .subscribe((data: Blob) => {
+        const fileBlob: Blob = new Blob([data], { type: 'application/pdf' });
+        const fileName = 'catalog.pdf';
+        FileSaver.saveAs(fileBlob, fileName);
+      });
   }
 
   private _addIdsAndStartQueue(text: string): void {
