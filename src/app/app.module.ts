@@ -5,12 +5,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MainComponent } from './_components/main/main.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { ProjectsPageComponent } from './projects-page/projects-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent
+    MainComponent,
+    LoginPageComponent,
+    ProjectsPageComponent
   ],
   imports: [
     BrowserModule,
