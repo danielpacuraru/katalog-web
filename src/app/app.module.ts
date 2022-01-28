@@ -9,13 +9,15 @@ import { MainComponent } from './_components/main/main.component';
 import { TokenInterceptor } from './_services/token.interceptor';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
+import { ProjectPageComponent } from './project-page/project-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     LoginPageComponent,
-    ProjectsPageComponent
+    ProjectsPageComponent,
+    ProjectPageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,24 @@
-<h1>Projects</h1>
+<div class="row">
+  <h1>Projects</h1>
+  <a (click)="newProject()">New Project</a>
+</div>
 
-<ul class="projects">
-  <li>1</li>
-</ul>
+<div class="row" *ngIf="show">
+  <form class="panel" (submit)="goProject()">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" [(ngModel)]="project.name">
+    <label for="title">Title</label>
+    <input id="title" name="title" type="text" [(ngModel)]="project.title">
+    <label for="description">Description</label>
+    <input id="description" name="description" type="text" [(ngModel)]="project.description">
+    <button type="submit">Create Project</button>
+  </form>
+</div>
+
+<div class="row">
+  <ul class="projects">
+    <li *ngFor="let project of projects">
+      <p>{{ project.name }}</p>
+    </li>
+  </ul>
+</div>
