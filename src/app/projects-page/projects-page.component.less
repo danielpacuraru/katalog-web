@@ -5,3 +5,23 @@
   margin: 0 auto;
   display: block;
 }
+
+.projects {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.projects li {
+  background: white;
+  width: calc(33.333% - 16px);
+  margin: 24px 0 0 24px;
+}
+
+.projects li:nth-child(3n+1) {
+  margin-left: 0;
+}
+
+.projects li:nth-child(-n+3) {
+  margin-top: 0;
+}

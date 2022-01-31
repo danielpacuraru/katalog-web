@@ -14,12 +14,19 @@ export class ProjectService {
     private http: HttpClient
   ) { }
 
-  public create(project: Project): Observable<Project> {
-    const proj = {
-      name: project.name
-    }
+  public getAll(): Observable<Project[]> {
     return this.http
-      .post<Project>(`${environment.apiUrl}/projects`, proj);
+      .get<Project[]>(`${environment.apiUrl}/projects`);
+  }
+
+  public get(id: string): Observable<Project> {
+    return this.http
+      .get<Project>(`${environment.apiUrl}/projects/${id}`);
+  }
+
+  public create(name: string): Observable<Project> {
+    return this.http
+      .post<Project>(`${environment.apiUrl}/projects`, { name });
   }
 
 }

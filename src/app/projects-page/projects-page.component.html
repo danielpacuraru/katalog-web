@@ -7,10 +7,6 @@
   <form class="panel" (submit)="goProject()">
     <label for="name">Name</label>
     <input id="name" name="name" type="text" [(ngModel)]="project.name">
-    <label for="title">Title</label>
-    <input id="title" name="title" type="text" [(ngModel)]="project.title">
-    <label for="description">Description</label>
-    <input id="description" name="description" type="text" [(ngModel)]="project.description">
     <button type="submit">Create Project</button>
   </form>
 </div>
@@ -18,7 +14,9 @@
 <div class="row">
   <ul class="projects">
     <li *ngFor="let project of projects">
+      <p>{{ project.id }}</p>
       <p>{{ project.name }}</p>
+      <a [routerLink]="project.id">Details</a>
     </li>
   </ul>
 </div>

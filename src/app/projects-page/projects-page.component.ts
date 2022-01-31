@@ -11,22 +11,16 @@ import { Project } from '../_models/project';
 })
 export class ProjectsPageComponent {
 
+  public projects: Project[] = [];
+
   constructor(
     private router: Router,
     private projectService: ProjectService
-  ) { }
-
-  public projects = [
-    {
-      name: 'Prodigy Corp.'
-    },
-    {
-      name: 'Bookface SA'
-    },
-    {
-      name: 'Tweester Org.'
-    }
-  ];
+  ) {
+    this.projectService
+      .getAll()
+      .subscribe((projects: Project[]) => this.projects = projects);
+  }
 
   public show: boolean = false;
 
@@ -35,14 +29,12 @@ export class ProjectsPageComponent {
   }
 
   public project = {
-    name: 'LinkedIn HQ',
-    title: 'LinkedIn',
-    description: 'Katalog for LinkedIn.'
+    name: 'LinkedIn HQ'
   }
 
   public goProject(): void {
     this.projectService
-      .create(this.project)
+      .create(this.project.name)
       .subscribe((project: Project) => {
         const id = project.id;
         this.router.navigateByUrl(`/projects/${id}`);

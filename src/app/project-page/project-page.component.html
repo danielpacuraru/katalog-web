@@ -1,1 +1,12 @@
-<p>project-page.component.html</p>
+<h1>{{ project.name }}</h1>
+
+<form (submit)="addArticle()">
+  <input type="text" id="code" name="code" [(ngModel)]="code">
+  <label for="code">Article ID</label>
+  <button type="submit">Add Article</button>
+</form>
+
+<ul class="articles">
+  <li *ngFor="let article of project.articles">{{ article.name }}
+  </li>
+</ul>
