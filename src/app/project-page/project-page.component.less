@@ -5,3 +5,71 @@
   margin: 0 auto;
   display: block;
 }
+
+h1 {
+  width: 100%;
+}
+
+h1 span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+h1 button {
+  background: black;
+  padding: 6px 12px;
+  margin-left: 40px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  font: 14px/20px sans-serif;
+  color: white;
+}
+
+form {
+  margin: 50px 0;
+}
+
+form input {
+  padding: 6px 15px 5px;
+  border: 1px solid black;
+}
+
+form button {
+  background: lightblue;
+  padding: 6px 15px 5px;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+}
+
+form input + button {
+  margin-left: 20px;
+}
+
+
+.articles {
+  width: 100%;
+  margin: 40px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.articles li {
+  width: calc(25% - 15px);
+}
+
+.articles li:nth-child(4n),
+.articles li:nth-child(4n-1),
+.articles li:nth-child(4n-2) {
+  margin-left: 20px;
+}
+
+.articles li:nth-child(n+5) {
+  margin-top: 20px;
+}
+
+.articles li img {
+  width: 100%;
+}

@@ -29,4 +29,9 @@ export class ProjectService {
       .post<Project>(`${environment.apiUrl}/projects`, { name });
   }
 
+  public download(id: string): Observable<any> {
+    return this.http
+      .get<any>(`${environment.apiUrl}/projects/${id}/katalog/minimal`);
+  }
+
 }

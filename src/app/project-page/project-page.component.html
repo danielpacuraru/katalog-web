@@ -1,12 +1,18 @@
-<h1>{{ project.name }}</h1>
+<h1>
+  <span>{{ project.name }}</span>
+  <button (click)="downloadProject()">Download Project</button>
+</h1>
 
 <form (submit)="addArticle()">
-  <input type="text" id="code" name="code" [(ngModel)]="code">
-  <label for="code">Article ID</label>
+  <input type="text" id="tag" name="tag" [(ngModel)]="tag">
+  <!-- <label for="tag">Article ID</label> -->
   <button type="submit">Add Article</button>
 </form>
 
 <ul class="articles">
-  <li *ngFor="let article of project.articles">{{ article.name }}
+  <li *ngFor="let article of articles">
+    <img [src]="article.thumbnail">
+    <p>{{ article.tag }}</p>
+    <p>{{ article.name }}</p>
   </li>
 </ul>

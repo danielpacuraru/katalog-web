@@ -15,7 +15,8 @@ export class ProjectResolver implements Resolve<Project> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Project> {
-    return this.projectService.get('61ed6c005b4d5a202436e0a2');
+    const projectId: string = route.params['id'];
+    return this.projectService.get(projectId);
   }
 
 }
