@@ -31,7 +31,7 @@ export class ProjectService {
 
   public download(id: string): Observable<any> {
     return this.http
-      .get<any>(`${environment.apiUrl}/projects/${id}/katalog/minimal`);
+      .get<any>(`${environment.apiUrl}/projects/${id}/katalog/minimal`, { responseType: 'blob' as 'json' });
   }
 
 }

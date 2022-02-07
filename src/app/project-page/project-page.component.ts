@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as FileSaver from 'file-saver';
 
 import { ProjectService } from '../_services/project.service';
 import { ArticleService } from '../_services/article.service';
@@ -30,7 +31,8 @@ export class ProjectPageComponent {
   }
 
   public downloadProject(): void {
-    this.projectService.download(this.project.id).subscribe(data => console.log(data));
+    const filename = `${this.project.name}.pdf`;
+    this.projectService.download(this.project.id).subscribe(blob => FileSaver.saveAs(blob, filename));
   }
 
 }
