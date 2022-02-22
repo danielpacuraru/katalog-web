@@ -13,5 +13,11 @@ export interface Project {
   name: string,
   title: string,
   description: string,
-  articles: Article[]
+  status: ProjectStatus
+}
+
+export enum ProjectStatus {
+  EMPTY = 'EMPTY',
+  QUEUE = 'QUEUE',
+  READY = 'READY'
 }

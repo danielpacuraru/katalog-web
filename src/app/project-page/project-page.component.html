@@ -1,17 +1,19 @@
 <h1>
   <span>{{ project.name }}</span>
-  <button (click)="downloadProject()">Download Project</button>
+  <button class="button neutral" *ngIf="project.status === 'EMPTY'" (click)="downloadProject()">Build Project</button>
+  <button class="button success" *ngIf="project.status === 'READY'" (click)="downloadProject()">Download Project</button>
 </h1>
 
 <form (submit)="addArticle()">
   <input type="text" id="tag" name="tag" [(ngModel)]="tag">
-  <!-- <label for="tag">Article ID</label> -->
   <button type="submit">Add Article</button>
 </form>
 
 <ul class="articles">
-  <li *ngFor="let article of articles">
-    <img [src]="article.thumbnail">
+  <li class="article" *ngFor="let article of articles">
+    <div class="article-head">
+      <img class="article-image" [src]="article.thumbnail">
+    </div>
     <p>{{ article.tag }}</p>
     <p>{{ article.name }}</p>
   </li>
