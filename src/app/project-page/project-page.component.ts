@@ -30,6 +30,10 @@ export class ProjectPageComponent {
     this.articleService.create(this.tag, this.project.id).subscribe((article: Article) => this.articles.push(article));
   }
 
+  public buildProject(): void {
+    this.projectService.build(this.project.id).subscribe();
+  }
+
   public downloadProject(): void {
     const filename = `${this.project.name}.pdf`;
     this.projectService.download(this.project.id).subscribe(blob => FileSaver.saveAs(blob, filename));

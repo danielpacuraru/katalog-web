@@ -29,6 +29,11 @@ export class ProjectService {
       .post<Project>(`${environment.apiUrl}/projects`, { name });
   }
 
+  public build(id: string): Observable<any> {
+    return this.http
+      .post<any>(`${environment.apiUrl}/projects/${id}/katalog`, { });
+  }
+
   public download(id: string): Observable<any> {
     return this.http
       .get<any>(`${environment.apiUrl}/projects/${id}/katalog/minimal`, { responseType: 'blob' as 'json' });

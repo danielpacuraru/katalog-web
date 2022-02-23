@@ -1,7 +1,7 @@
 <h1>
   <span>{{ project.name }}</span>
-  <button class="button neutral" *ngIf="project.status === 'EMPTY'" (click)="downloadProject()">Build Project</button>
-  <button class="button success" *ngIf="project.status === 'READY'" (click)="downloadProject()">Download Project</button>
+  <button *ngIf="project.status !== 'READY'" class="button neutral" [class.loading]="project.status === 'QUEUE'" [disabled]="project.status === 'QUEUE'" (click)="buildProject()">Build Project</button>
+  <button *ngIf="project.status === 'READY'" class="button success" (click)="downloadProject()">Download Project</button>
 </h1>
 
 <form (submit)="addArticle()">
