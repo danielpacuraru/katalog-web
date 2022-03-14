@@ -1,20 +1,42 @@
-<h1>
-  <span>{{ project.name }}</span>
-  <button *ngIf="project.status !== 'READY'" class="button neutral" [class.loading]="project.status === 'QUEUE'" [disabled]="project.status === 'QUEUE'" (click)="buildProject()">Build Project</button>
-  <button *ngIf="project.status === 'READY'" class="button success" (click)="downloadProject()">Download Project</button>
-</h1>
+<div class="heading">
+  <div class="heading-min">
+    <h1>{{ project.name }}</h1>
+  </div>
+  <div class="heading-auto">
+    <button *ngIf="project.status !== 'READY'" class="button neutral" [class.loading]="project.status === 'QUEUE'" [disabled]="project.status === 'QUEUE'" (click)="buildProject()">Build Project</button>
+    <button *ngIf="project.status === 'READY'" class="button success" (click)="downloadProject()">Download Project</button>
+  </div>
+</div>
 
-<form (submit)="addArticle()">
-  <input type="text" id="tag" name="tag" [(ngModel)]="tag">
+<form (submit)="addArticles()">
+  <textarea id="codes" name="codes" [(ngModel)]="codes"></textarea>
   <button type="submit">Add Article</button>
 </form>
+
+<div class="heading">
+  <div class="heading-min">
+    <h2>Articles List <i>({{ articles.length }})</i></h2>
+  </div>
+  <div class="heading-auto">
+  </div>
+</div>
 
 <ul class="articles">
   <li class="article" *ngFor="let article of articles">
     <div class="article-head">
       <img class="article-image" [src]="article.thumbnail">
     </div>
-    <p>{{ article.tag }}</p>
+    <p>{{ article.code }}</p>
     <p>{{ article.name }}</p>
+    <select [(ngModel)]="article.group" (ngModelChange)="updatedArticleId = article.id; updateArticle($event)">
+      <option value="411">411</option>
+      <option value="422">422</option>
+      <option value="430">430</option>
+      <option value="432">432</option>
+      <option value="440">440</option>
+      <option value="510">510</option>
+      <option value="542">542</option>
+      <option value="620">620</option>
+    </select>
   </li>
 </ul>

@@ -24,9 +24,14 @@ export class ArticleService {
       .get<Project>(`${environment.apiUrl}/projects/${id}`);
   }*/
 
-  public create(tag: string, projectId: string): Observable<Article> {
+  public create(code: string, projectId: string): Observable<Article> {
     return this.http
-      .post<Article>(`${environment.apiUrl}/projects/${projectId}/articles`, { tag });
+      .post<Article>(`${environment.apiUrl}/projects/${projectId}/articles`, { code });
+  }
+
+  public update(group: string, articleId: string, projectId: string): Observable<Article> {
+    return this.http
+      .put<Article>(`${environment.apiUrl}/projects/${projectId}/articles/${articleId}`, { group });
   }
 
 }

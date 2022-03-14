@@ -15,7 +15,8 @@ export class ProjectPageComponent {
 
   public project: Project;
   public articles: Article[];
-  public tag: string = '3254915';
+  public codes: string = '';
+  public codesList: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,8 +27,31 @@ export class ProjectPageComponent {
     this.articles = this.route.snapshot.data.articles;
   }
 
+  public addArticles(): void {
+    this.codesList = [];
+
+    const list = this.codes.split('\n');
+    list.forEach(c => {
+      const code = c.trim();
+      if(code) this.codesList.push(code);
+    });
+
+    this.addArticle();
+  }
+
   public addArticle(): void {
-    this.articleService.create(this.tag, this.project.id).subscribe((article: Article) => this.articles.push(article));
+    if(!this.codesList.length) return;
+
+    this.articleService
+      .create(this.codesList[0], this.project.id)
+      .subscribe((article: Article) => {
+        this.articles.push(article);
+        this.addArticle();
+      }, () => {
+        this.addArticle();
+      });
+
+    this.codesList.shift();
   }
 
   public buildProject(): void {
@@ -37,6 +61,14 @@ export class ProjectPageComponent {
   public downloadProject(): void {
     const filename = `${this.project.name}.pdf`;
     this.projectService.download(this.project.id).subscribe(blob => FileSaver.saveAs(blob, filename));
+  }
+
+  public updatedArticleId: string = '';
+
+  public updateArticle(group: string) {
+
+    this.articleService.update(group, this.updatedArticleId, this.project.id).subscribe();
+
   }
 
 }
