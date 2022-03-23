@@ -4,7 +4,7 @@ import * as FileSaver from 'file-saver';
 
 import { ProjectService } from '../_services/project.service';
 import { ArticleService } from '../_services/article.service';
-import { Project, Article } from '../_models/project';
+import { Project, Article, ArticleStatus, ArticleBox } from '../_models/project';
 
 @Component({
   selector: 'project-page',
@@ -14,7 +14,7 @@ import { Project, Article } from '../_models/project';
 export class ProjectPageComponent {
 
   public project: Project;
-  public articles: Article[];
+  public articles: ArticleBox[];
   public codes: string = '';
   public codesList: string[] = [];
 
@@ -24,7 +24,7 @@ export class ProjectPageComponent {
     private articleService: ArticleService
   ) {
     this.project = this.route.snapshot.data.project;
-    this.articles = this.route.snapshot.data.articles;
+    this.articles = this.route.snapshot.data.articles.map((article: Article) => { return { code: article.code, status: ArticleStatus.SUCCESS, data: article } });
   }
 
   public addArticles(): void {
@@ -33,25 +33,31 @@ export class ProjectPageComponent {
     const list = this.codes.split('\n');
     list.forEach(c => {
       const code = c.trim();
-      if(code) this.codesList.push(code);
+      if(code) this.articles.unshift({ code, status: ArticleStatus.QUEUED });
     });
 
-    this.addArticle();
+    this.syncArticles();
   }
 
-  public addArticle(): void {
-    if(!this.codesList.length) return;
+  public syncArticles(): void {
+    const nextArticle: ArticleBox | undefined = this.articles.find((article: ArticleBox) => article.status === ArticleStatus.QUEUED);
+
+    if(!nextArticle) return;
 
     this.articleService
-      .create(this.codesList[0], this.project.id)
+      .create(nextArticle.code, this.project.id)
       .subscribe((article: Article) => {
-        this.articles.push(article);
-        this.addArticle();
-      }, () => {
-        this.addArticle();
+        nextArticle.status = ArticleStatus.SUCCESS;
+        nextArticle.data = article;
+        this.syncArticles();
+      }, (error) => {
+        console.log(error);
+        if(error.status === 409) {
+          nextArticle.status = ArticleStatus.DUPLICATE;
+          console.log('conflict');
+        }
+        this.syncArticles();
       });
-
-    this.codesList.shift();
   }
 
   public buildProject(): void {

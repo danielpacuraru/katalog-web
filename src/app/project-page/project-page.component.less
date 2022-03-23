@@ -46,20 +46,49 @@ form input + button {
 }
 
 .articles li {
-  background: #F0F8FB;
   width: calc(20% - 16px);
-  padding: 20px;
-  border: 1px solid #78CCE5;
-  box-sizing: border-box;
   margin: 20px 0 0 20px;
+  display: flex;
+  flex-direction: column;
+
+  &:nth-child(5n+1) { margin-left: 0; }
+  &:nth-child(-n+5) { margin-top: 0; }
 }
 
-.articles li:nth-child(5n+1) {
-  margin-left: 0;
+.article {
+  background: lightgrey;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
-.articles li:nth-child(-n+5) {
-  margin-top: 0;
+.article.QUEUED {
+  background: fade(#E2F1F8, 60%);
+  border-color: #78CCE5;
+}
+
+.article.SUCCESS {
+  background: fade(#E2F1F8, 60%);
+  border-color: #78CCE5;
+}
+
+.article.SUCCESS.PARTIAL {
+  background: fade(#F8E7CD, 60%);
+  border-color: #F9C274;
+}
+
+.article.DUPLICATE {
+  background: fade(#DFDFF4, 60%);
+  border-color: #A79CDF;
+}
+
+.article.MISSING {
+  background: fade(#F8E4E7, 60%);
+  border-color: #F5828C;
 }
 
 .article-head {
@@ -70,7 +99,7 @@ form input + button {
   position: relative;
 }
 
-.article-image {
+.article-head img {
   max-width: 100%;
   max-height: 100%;
   position: absolute;
@@ -78,6 +107,20 @@ form input + button {
   top: 50%;
   transform: translate(-50%, -50%);
   mix-blend-mode: multiply;
+}
+
+.article-body {
+  flex: 1;
+}
+
+.article-foot {
+}
+
+
+
+.article p {
+  margin-bottom: 3px;
+  font: 15px/20px 'Proxima';
 }
 
 .article select {

@@ -14,7 +14,6 @@
 <div class="row">
   <ul class="projects">
     <li *ngFor="let project of projects">
-      <p>{{ project.id }}</p>
       <p>{{ project.name }}</p>
       <a [routerLink]="project.id">Details</a>
     </li>

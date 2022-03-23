@@ -22,21 +22,38 @@
 </div>
 
 <ul class="articles">
-  <li class="article" *ngFor="let article of articles">
-    <div class="article-head">
-      <img class="article-image" [src]="article.thumbnail">
+  <li *ngFor="let article of articles">
+
+    <!-- SUCCESS -->
+    <div class="article SUCCESS" *ngIf="article.status === 'SUCCESS'">
+      <div class="article-head">
+        <img [src]="article.data.thumbnail">
+      </div>
+      <div class="article-body">
+        <p>{{ article.data.code }}</p>
+        <p>{{ article.data.name }}</p>
+      </div>
+      <div class="article-foot">
+        <select [(ngModel)]="article.data.group" (ngModelChange)="updatedArticleId = article.data.id; updateArticle($event)">
+          <option value="411">411</option>
+          <option value="422">422</option>
+          <option value="430">430</option>
+          <option value="432">432</option>
+          <option value="440">440</option>
+          <option value="510">510</option>
+          <option value="542">542</option>
+          <option value="620">620</option>
+        </select>
+      </div>
     </div>
-    <p>{{ article.code }}</p>
-    <p>{{ article.name }}</p>
-    <select [(ngModel)]="article.group" (ngModelChange)="updatedArticleId = article.id; updateArticle($event)">
-      <option value="411">411</option>
-      <option value="422">422</option>
-      <option value="430">430</option>
-      <option value="432">432</option>
-      <option value="440">440</option>
-      <option value="510">510</option>
-      <option value="542">542</option>
-      <option value="620">620</option>
-    </select>
+
+    <!-- DUPLICATE -->
+    <div class="article DUPLICATE" *ngIf="article.status === 'DUPLICATE'">
+    </div>
+
+    <!-- MISSING -->
+    <div class="article MISSING" *ngIf="article.status === 'MISSING'">
+    </div>
+
   </li>
 </ul>

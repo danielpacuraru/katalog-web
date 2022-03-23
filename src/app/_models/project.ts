@@ -15,9 +15,22 @@ export enum ProjectStatus {
 export interface Article {
   id: string,
   code: string,
-  group?: string,
   name: string,
   maker: string,
   thumbnail?: string,
-  doc: string
+  doc: string,
+  group?: string
+}
+
+export enum ArticleStatus {
+  SUCCESS = 'SUCCESS',
+  QUEUED = 'QUEUED',
+  DUPLICATE = 'DUPLICATE',
+  MISSING = 'MISSING'
+}
+
+export interface ArticleBox {
+  code: string,
+  status: ArticleStatus,
+  data?: any
 }
