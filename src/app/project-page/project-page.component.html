@@ -25,7 +25,7 @@
   <li *ngFor="let article of articles">
 
     <!-- SUCCESS -->
-    <div class="article SUCCESS" *ngIf="article.status === 'SUCCESS'">
+    <div class="article SUCCESS" [class.PARTIAL]="!article.data.group" *ngIf="article.status === 'SUCCESS'">
       <div class="article-head">
         <img [src]="article.data.thumbnail">
       </div>
@@ -35,14 +35,14 @@
       </div>
       <div class="article-foot">
         <select [(ngModel)]="article.data.group" (ngModelChange)="updatedArticleId = article.data.id; updateArticle($event)">
-          <option value="411">411</option>
-          <option value="422">422</option>
+          <option value="411">411 - chiuevete</option>
+          <option value="422">422 - prize</option>
           <option value="430">430</option>
           <option value="432">432</option>
           <option value="440">440</option>
           <option value="510">510</option>
-          <option value="542">542</option>
-          <option value="620">620</option>
+          <option value="612">612</option>
+          <option value="640">640</option>
         </select>
       </div>
     </div>

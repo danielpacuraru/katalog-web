@@ -31,12 +31,12 @@ export class ProjectService {
 
   public build(id: string): Observable<any> {
     return this.http
-      .post<any>(`${environment.apiUrl}/projects/${id}/katalog`, { });
+      .post<any>(`${environment.apiUrl}/projects/${id}/catalog`, { });
   }
 
   public download(id: string): Observable<any> {
     return this.http
-      .get<any>(`${environment.apiUrl}/projects/${id}/katalog/minimal`, { responseType: 'blob' as 'json' });
+      .get<any>(`${environment.apiUrl}/projects/${id}/catalog`, { responseType: 'blob' as 'json' });
   }
 
 }
