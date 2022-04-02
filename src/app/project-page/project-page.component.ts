@@ -56,6 +56,10 @@ export class ProjectPageComponent {
           nextArticle.status = ArticleStatus.DUPLICATE;
           console.log('conflict');
         }
+        else if (error.status === 404) {
+          nextArticle.status = ArticleStatus.MISSING;
+          console.log('missing');
+        }
         this.syncArticles();
       });
   }
@@ -65,7 +69,7 @@ export class ProjectPageComponent {
   }
 
   public downloadProject(): void {
-    const filename = `${this.project.name}.pdf`;
+    const filename = this.project.name + '.zip';
     this.projectService.download(this.project.id).subscribe(blob => FileSaver.saveAs(blob, filename));
   }
 
