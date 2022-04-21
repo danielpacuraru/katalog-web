@@ -1,0 +1,37 @@
+<header>
+  <h1>Admin</h1>
+  <button class="button" (click)="openModal1()">Add Products</button>
+</header>
+
+<ul class="items">
+  <li *ngFor="let item of items">
+    <div class="item">
+      <div class="item-img">
+        <img [src]="item.thumbnail">
+      </div>
+      <div class="item-data">
+        <p>{{ item.name }}</p>
+        <p>{{ item.maker }}</p>
+        <p>{{ item.group }}</p>
+      </div>
+    </div>
+  </li>
+  <!-- <thead>
+    <tr>
+      <th>Group</th>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Maker</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{ item.group }}</td>
+      <td>{{ item.code }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.maker }}</td>
+    </tr>
+  </tbody> -->
+</ul>
+
+<admin-group-modal #modal1></admin-group-modal>

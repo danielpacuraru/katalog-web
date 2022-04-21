@@ -1,40 +1,18 @@
-<div class="heading">
-  <div class="heading-min">
-    <h1>{{ project.name }}</h1>
-  </div>
-  <div class="heading-auto">
-    <button *ngIf="project.status !== 'READY'" class="button neutral" [class.loading]="project.status === 'QUEUE'" [disabled]="project.status === 'QUEUE'" (click)="buildProject()">Build Project</button>
-    <button *ngIf="project.status === 'READY'" class="button success" (click)="downloadProject()">Download Project</button>
-  </div>
-</div>
-
-<form (submit)="addArticles()">
-  <textarea id="codes" name="codes" [(ngModel)]="codes"></textarea>
-  <button type="submit">Add Article</button>
-</form>
-
-<div class="heading">
-  <div class="heading-min">
-    <h2>Articles List <i>({{ articles.length }})</i></h2>
-  </div>
-  <div class="heading-auto">
-  </div>
-</div>
-
-<ul class="articles">
-  <li *ngFor="let article of articles">
-
-    <!-- SUCCESS -->
-    <div class="article SUCCESS" [class.PARTIAL]="!article.data.group" *ngIf="article.status === 'SUCCESS'">
-      <div class="article-head">
-        <img [src]="article.data.thumbnail">
+<div class="modal" *ngIf="isOpen">
+  <div class="modal-bg"></div>
+  <div class="modal-div">
+    <div class="modal-head">
+      <h1>Add Products</h1>
+      <a (click)="close()">Close</a>
+    </div>
+    <div class="modal-body">
+      <div class="form-field">
+        <label>IDs</label>
+        <textarea [(ngModel)]="ids"></textarea>
       </div>
-      <div class="article-body">
-        <p>{{ article.data.code }}</p>
-        <p>{{ article.data.name }}</p>
-      </div>
-      <div class="article-foot">
-        <select [(ngModel)]="article.data.group" (ngModelChange)="updatedArticleId = article.data.id; updateArticle($event)">
+      <div class="form-field">
+        <label>Group</label>
+        <select [(ngModel)]="group">
           <optgroup label="41 - Basisinstallasjoner for elkraft">
             <option value="411">411 - Kabelføring</option>
             <option value="412">412 - Systemer for jording</option>
@@ -159,14 +137,8 @@
         </select>
       </div>
     </div>
-
-    <!-- DUPLICATE -->
-    <div class="article DUPLICATE" *ngIf="article.status === 'DUPLICATE'">
+    <div class="modal-foot">
+      <button class="button" (click)="addProducts()">Add Products</button>
     </div>
-
-    <!-- MISSING -->
-    <div class="article MISSING" *ngIf="article.status === 'MISSING'">
-    </div>
-
-  </li>
-</ul>
+  </div>
+</div>

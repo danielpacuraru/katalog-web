@@ -13,6 +13,8 @@ import { User, Auth } from '../_models/auth';
 export class LoginPageComponent {
 
   public loginForm: FormGroup;
+  public loginFormLoading: boolean = false;
+  public loginFormError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,21 +22,28 @@ export class LoginPageComponent {
     private authService: AuthService
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['pacurarudaniel@gmail.com', [ Validators.required, Validators.email ]],
-      password: ['123', Validators.required ]
+      email: ['', [ Validators.required, Validators.email ]],
+      password: ['', Validators.required ]
     });
   }
 
-  public submit(): void {
-    const { email, password } = this.loginForm.value;
+  public loginFormSubmit(): void {
+    this.loginForm.markAllAsTouched();
+    if (this.loginForm.invalid) { return; }
 
+    this.loginFormLoading = true;
+    this.loginFormError = false;
     this.authService
-      .login(email, password)
+      .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe((auth: Auth) => {
         this.router.navigateByUrl('/');
+        this.loginFormLoading = false;
       }, () => {
-        console.log('error');
+        this.loginFormError = true;
+        this.loginFormLoading = false;
       });
   }
+
+  public get f() { return this.loginForm.controls; }
 
 }

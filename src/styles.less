@@ -34,6 +34,10 @@
     url('/assets/fonts/proxima-bold.ttf') format('truetype');
 }
 
+:root {
+  --font: 'Proxima', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 * {
   padding: 0;
   border: 0;
@@ -44,6 +48,13 @@
 body {
   background: #F9F9F9;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+main,
+header,
+section,
+footer {
+  display: block;
 }
 
 ul, ol {
@@ -86,23 +97,6 @@ ul, ol {
   cursor: default;
   opacity: 0.25;
   color: transparent;
-}
-
-.button.loading:after {
-  content: '';
-  width: 20px;
-  height: 20px;
-  border: 1px solid white;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  border-radius: 50%;
-  box-sizing: border-box;
-  position: absolute;
-  left: 50%;
-  margin-left: -10px;
-  top: 50%;
-  margin-top: -10px;
-  animation: anim-rotate 0.5s linear infinite;
 }
 
 .button.primary {

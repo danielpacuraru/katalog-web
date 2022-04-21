@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.katalogs.cf'
+  apiUrl: 'https://api.fdv-dokumentasjon.no'
 };

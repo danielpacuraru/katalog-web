@@ -22,6 +22,11 @@ export interface Article {
   group?: string
 }
 
+export interface ArticleBatch {
+  items: Article[],
+  count: number
+}
+
 export enum ArticleStatus {
   SUCCESS = 'SUCCESS',
   QUEUED = 'QUEUED',

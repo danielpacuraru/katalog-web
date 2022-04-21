@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminGroupModalComponent } from './admin-page/admin-group-modal/admin-group-modal.component';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './_components/main/main.component';
@@ -15,6 +18,8 @@ import { ProjectPageComponent } from './project-page/project-page.component';
   declarations: [
     AppComponent,
     MainComponent,
+    AdminPageComponent,
+    AdminGroupModalComponent,
     LoginPageComponent,
     ProjectsPageComponent,
     ProjectPageComponent
