@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ProjectService } from '../_services/project.service';
@@ -13,6 +13,8 @@ export class ProjectsPageComponent {
 
   public projects: Project[] = [];
 
+  @ViewChild('createProjectModal') createProjectModal: any;
+
   constructor(
     private router: Router,
     private projectService: ProjectService
@@ -22,23 +24,13 @@ export class ProjectsPageComponent {
       .subscribe((projects: Project[]) => this.projects = projects);
   }
 
-  public show: boolean = false;
-
-  public newProject(): void {
-    this.show = true;
+  public createProject(): void {
+    this.createProjectModal.open();
   }
 
-  public project = {
-    name: 'LinkedIn HQ'
-  }
-
-  public goProject(): void {
-    this.projectService
-      .create(this.project.name)
-      .subscribe((project: Project) => {
-        const id = project.id;
-        this.router.navigateByUrl(`/projects/${id}`);
-      });
+  public newProject(project: Project): void {
+    this.projects.push(project);
+    this.router.navigateByUrl(`/projects/${project.id}`);
   }
 
 }

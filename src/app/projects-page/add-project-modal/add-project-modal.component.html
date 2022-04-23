@@ -1,0 +1,25 @@
+<div class="modal" *ngIf="show">
+  <div class="modal-bg" (click)="close()"></div>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>Create project</h2>
+      <p>Enter a name to create a new project.</p>
+      <a class="close" (click)="close()"></a>
+    </div>
+    <div class="modal-body">
+      <form id="add-project-form" [formGroup]="form" (ngSubmit)="submit()">
+        <fieldset>
+          <label>Project name</label>
+          <input type="text" autocomplete="off" formControlName="name">
+          <ul class="errors">
+            <li *ngIf="form.controls.name.errors?.required">Project name is required.</li>
+          </ul>
+        </fieldset>
+      </form>
+    </div>
+    <div class="modal-foot">
+      <button class="button" (click)="close()">Cancel</button>
+      <button class="button primary" type="submit" form="add-project-form" [class.loading]="loading" [disabled]="loading">Create project</button>
+    </div>
+  </div>
+</div>

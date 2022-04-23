@@ -14,6 +14,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 
+import { AddProjectModalComponent } from './projects-page/add-project-modal/add-project-modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,8 @@ import { ProjectPageComponent } from './project-page/project-page.component';
     AdminGroupModalComponent,
     LoginPageComponent,
     ProjectsPageComponent,
-    ProjectPageComponent
+    ProjectPageComponent,
+    AddProjectModalComponent
   ],
   imports: [
     BrowserModule,

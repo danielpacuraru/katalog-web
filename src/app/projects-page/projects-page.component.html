@@ -1,21 +1,23 @@
-<div class="row">
-  <h1>Projects</h1>
-  <a (click)="newProject()">New Project</a>
-</div>
-
-<div class="row" *ngIf="show">
-  <form class="panel" (submit)="goProject()">
-    <label for="name">Name</label>
-    <input id="name" name="name" type="text" [(ngModel)]="project.name">
-    <button type="submit">Create Project</button>
-  </form>
-</div>
+<header class="head">
+  <div class="head-left">
+    <h1>Projects</h1>
+  </div>
+  <div class="head-right">
+    <button class="button primary" (click)="createProject()">Create project</button>
+  </div>
+</header>
 
 <div class="row">
   <ul class="projects">
     <li *ngFor="let project of projects">
-      <p>{{ project.name }}</p>
-      <a [routerLink]="project.id">Details</a>
+      <a class="project" [routerLink]="project.id">
+        <h2>{{ project.name }}</h2>
+      </a>
     </li>
+    <li *ngIf="projects.length < 1"><div class="project-empty"></div></li>
+    <li *ngIf="projects.length < 2"><div class="project-empty"></div></li>
+    <li *ngIf="projects.length < 3"><div class="project-empty"></div></li>
   </ul>
 </div>
+
+<add-project-modal (create)="newProject($event)" #createProjectModal></add-project-modal>

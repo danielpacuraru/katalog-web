@@ -46,8 +46,8 @@
 }
 
 body {
-  background: #F9F9F9;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #F2F4F5;
+  font-family: var(--font);
 }
 
 main,
@@ -76,7 +76,7 @@ ul, ol {
 }
 
 .button {
-  background: #383C3E;
+  background: #EEF0F0;
   padding: 9px 16px 7px;
   border-radius: 4px;
   display: inline-block;
@@ -85,17 +85,18 @@ ul, ol {
   cursor: pointer;
   user-select: none;
   font: 500 15px/20px 'Proxima';
-  color: white;
+  color: #2D3E4D;
 }
 
-.button.success {
-  background: #4DB142;
+.button.primary {
+  background: #5B3DF1;
+  color: white;
 }
 
 .button[disabled] {
   pointer-events: none;
   cursor: default;
-  opacity: 0.25;
+  opacity: 0.5;
   color: transparent;
 }
 
@@ -107,6 +108,23 @@ ul, ol {
   background: #4DB142;
 }
 
+.button.loading:after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  margin-left: -10px;
+  top: 50%;
+  margin-top: -10px;
+  animation: anim-rotate 0.5s linear infinite;
+}
+
 @keyframes anim-rotate {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -114,35 +132,82 @@ ul, ol {
 
 
 
-.heading {
+
+
+
+
+
+
+
+fieldset {
+  position: relative;
+}
+
+fieldset label {
+  margin-bottom: 3px;
+  display: block;
+  font: 14px/20px var(--font);
+  color: #4B5C6A;
+}
+
+fieldset input {
+  width: 100%;
+  padding: 7px 10px 5px;
+  border: 1px solid #C8CCCE;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: block;
+  font: 15px var(--font);
+  color: #2D3E4D;
+}
+
+fieldset .errors {
+  margin-top: 1px;
+  display: none;
+}
+
+fieldset .errors li {
+  font: 13px/18px var(--font);
+  color: #F33F51;
+}
+
+fieldset input.ng-invalid.ng-touched ~ .errors {
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.head {
   display: flex;
 }
 
-.heading-min {
+.head-left {
   flex: 1;
 }
 
-.heading-auto {
+.head-right {
   flex-shrink: 0;
 }
 
-.heading h1 {
-  padding: 4px 0 0;
-  font: bold 36px/32px 'Proxima';
-  color: #22303A;
-}
 
-.heading h2 {
-  padding: 4px 0 0;
-  font: bold 24px/32px 'Proxima';
-  color: #22303A;
-}
 
-.heading h2 i {
-  font-style: normal;
-  font-weight: 500;
-  color: #2DA3C3;
-}
+
+
+
 
 
 
@@ -275,6 +340,79 @@ ul, ol {
 
 
 
+
+
+
+.modal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+}
+
+.modal-bg {
+  background: linear-gradient(135deg, fade(#6588F2, 50%) 0%, fade(#923DF1, 20%) 100%);
+  backdrop-filter: blur(3px);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.modal-box {
+  background: white;
+  width: 500px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 30px fade(black, 5%);
+  display: block;
+  position: relative;
+}
+
+.modal-head {
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.modal-head h2 {
+  font: 500 24px/32px var(--font);
+  color: #2D3E4D;
+}
+
+.modal-head p {
+  font: 14px/20px var(--font);
+  color: #8797A3;
+}
+
+.modal-head .close {
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTE3Ljg4IDE2bDUuNzMzLTUuNzJhMS4zNCAxLjM0IDAgMCAwIDAtMS44OTMgMS4zNCAxLjM0IDAgMCAwLTEuODkzIDBMMTYgMTQuMTJsLTUuNzItNS43MzNhMS4zNCAxLjM0IDAgMCAwLTEuODkzIDAgMS4zNCAxLjM0IDAgMCAwIDAgMS44OTNMMTQuMTIgMTZsLTUuNzMzIDUuNzJhMS4zMyAxLjMzIDAgMCAwLS4yOTIuNDM0Yy0uMDY4LjE2My0uMTAzLjMzNy0uMTAzLjUxM3MuMDM1LjM1LjEwMy41MTNhMS4zMyAxLjMzIDAgMCAwIC4yOTIuNDM0Yy4xMjQuMTI1LjI3MS4yMjQuNDM0LjI5MnMuMzM3LjEwMi41MTMuMTAyLjM1LS4wMzUuNTEzLS4xMDIuMzEtLjE2Ny40MzQtLjI5MkwxNiAxNy44OGw1LjcyIDUuNzMzYy4xMjQuMTI1LjI3MS4yMjQuNDM0LjI5MnMuMzM3LjEwMi41MTMuMTAyLjM1LS4wMzUuNTEzLS4xMDIuMzEtLjE2Ny40MzQtLjI5MmExLjMzIDEuMzMgMCAwIDAgLjI5Mi0uNDM0Yy4wNjgtLjE2My4xMDItLjMzNy4xMDItLjUxM3MtLjAzNS0uMzUtLjEwMi0uNTEzYTEuMzMgMS4zMyAwIDAgMC0uMjkyLS40MzRMMTcuODggMTZ6IiBmaWxsPSIjMmQzZTRkIi8+PC9zdmc+');
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  position: absolute;
+  right: -4px;
+  top: 0;
+  opacity: 0.5;
+  transition: all 0.15s ease-out;
+}
+
+.modal-head .close:hover {
+  opacity: 1;
+}
+
+.modal-foot {
+  padding-top: 40px;
+  position: relative;
+  text-align: right;
+}
+
+.modal-foot button + button {
+  margin-left: 12px;
+}
 
 
 
