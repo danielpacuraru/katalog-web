@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as FileSaver from 'file-saver';
 
@@ -18,6 +18,8 @@ export class ProjectPageComponent {
   public codes: string = '';
   public codesList: string[] = [];
 
+  @ViewChild('addArticlesModal') addArticlesModal: any;
+
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
@@ -25,6 +27,10 @@ export class ProjectPageComponent {
   ) {
     this.project = this.route.snapshot.data.project;
     this.articles = this.route.snapshot.data.articles.map((article: Article) => { return { code: article.code, status: ArticleStatus.SUCCESS, data: article } });
+  }
+
+  public addArticlesModalOpen(): void {
+    this.addArticlesModal.open();
   }
 
   public addArticles(): void {

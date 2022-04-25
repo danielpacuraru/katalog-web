@@ -24,7 +24,7 @@ export class ProjectsPageComponent {
       .subscribe((projects: Project[]) => this.projects = projects);
   }
 
-  public createProject(): void {
+  public createProjectModalOpen(): void {
     this.createProjectModal.open();
   }
 

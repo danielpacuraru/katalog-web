@@ -1,0 +1,22 @@
+<div class="modal" *ngIf="show">
+  <div class="modal-bg" (click)="close()"></div>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>Add articles</h2>
+      <p>Copy a list of article IDs to add to the project.</p>
+      <a class="close" (click)="close()"></a>
+    </div>
+    <div class="modal-body">
+      <form id="add-project-form" [formGroup]="form" (ngSubmit)="submit()">
+        <fieldset>
+          <label>Articles list</label>
+          <textarea formControlName="list"></textarea>
+        </fieldset>
+      </form>
+    </div>
+    <div class="modal-foot">
+      <button class="button" (click)="close()">Cancel</button>
+      <button class="button primary" type="submit" form="add-project-form" [class.loading]="loading" [disabled]="loading">Add articles</button>
+    </div>
+  </div>
+</div>
