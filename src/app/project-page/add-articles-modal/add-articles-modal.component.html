@@ -7,16 +7,16 @@
       <a class="close" (click)="close()"></a>
     </div>
     <div class="modal-body">
-      <form id="add-project-form" [formGroup]="form" (ngSubmit)="submit()">
+      <form id="add-articles-form" (ngSubmit)="submit()">
         <fieldset>
-          <label>Articles list</label>
-          <textarea formControlName="list"></textarea>
+          <label for="text">Articles list</label>
+          <textarea id="text" name="text" [(ngModel)]="text"></textarea>
         </fieldset>
       </form>
     </div>
     <div class="modal-foot">
       <button class="button" (click)="close()">Cancel</button>
-      <button class="button primary" type="submit" form="add-project-form" [class.loading]="loading" [disabled]="loading">Add articles</button>
+      <button class="button primary" type="submit" form="add-articles-form" [class.loading]="loading" [disabled]="loading">Add articles</button>
     </div>
   </div>
 </div>

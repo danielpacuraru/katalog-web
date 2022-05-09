@@ -1,7 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { ProjectService } from '../../_services/project.service';
+import { ArticleService } from '../../_services/article.service';
 import { Project } from '../../_models/project';
 
 @Component({
@@ -11,27 +10,29 @@ import { Project } from '../../_models/project';
 export class AddArticlesModalComponent {
 
   public show: boolean = false;
-  public form: FormGroup;
   public loading: boolean = false;
+  public text: string = '';
+
+  @Input()
+  public projectId: string = '';
 
   @Output()
-  create = new EventEmitter<Project>();
+  private add = new EventEmitter<string[]>();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private projectService: ProjectService
-  ) {
-    this.form = this.formBuilder.group({
-      list: ['']
-    });
-  }
+    private articleService: ArticleService
+  ) { }
 
-  open(): void {
+  public open(): void {
     this.show = true;
+    this.loading = false;
+    this.text = '';
   }
 
-  submit(): void {
-    console.log(this.form.value.list);
+  public submit(): void {
+    const codes = this.textToList(this.text);
+
+    this.articleService.create(codes, this.projectId).subscribe(data => console.log(data));
     /*this.loading = true;
     this.form.markAllAsTouched();
 
@@ -49,8 +50,20 @@ export class AddArticlesModalComponent {
       });*/
   }
 
-  close(): void {
+  public close(): void {
     this.show = false;
+  }
+
+  private textToList(text: string): string[] {
+    const list: string[] = text.split('\n');
+    const codes: string[] = [];
+
+    list.forEach(line => {
+      const code = line.trim();
+      if(code) codes.push(code);
+    });
+
+    return codes;
   }
 
 }

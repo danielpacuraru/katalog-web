@@ -19,7 +19,7 @@ export interface Article {
   maker: string,
   thumbnail?: string,
   doc: string,
-  group?: string
+  category?: string
 }
 
 export interface ArticleBatch {

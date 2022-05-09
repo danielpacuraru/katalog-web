@@ -50,7 +50,7 @@ export class ProjectPageComponent {
 
     if(!nextArticle) return;
 
-    this.articleService
+    /*this.articleService
       .create(nextArticle.code, this.project.id)
       .subscribe((article: Article) => {
         nextArticle.status = ArticleStatus.SUCCESS;
@@ -67,7 +67,7 @@ export class ProjectPageComponent {
           console.log('missing');
         }
         this.syncArticles();
-      });
+      });*/
   }
 
   public buildProject(): void {
