@@ -8,13 +8,8 @@ import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectResolver } from './project-page/project.resolver';
 import { ArticlesResolver } from './project-page/articles.resolver';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
 
 const routes: Routes = [
-  {
-    path: 'admin',
-    component: AdminPageComponent
-  },
   {
     path: '',
     component: MainComponent,

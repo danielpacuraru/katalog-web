@@ -4,7 +4,7 @@ import * as FileSaver from 'file-saver';
 
 import { ProjectService } from '../_services/project.service';
 import { ArticleService } from '../_services/article.service';
-import { Project, Article, ArticleStatus, ArticleBox } from '../_models/project';
+import { Project, Article, ArticleStatus } from '../_models/project';
 
 @Component({
   selector: 'project-page',
@@ -14,9 +14,8 @@ import { Project, Article, ArticleStatus, ArticleBox } from '../_models/project'
 export class ProjectPageComponent {
 
   public project: Project;
-  public articles: ArticleBox[];
-  public codes: string = '';
-  public codesList: string[] = [];
+  public articles: Article[];
+  public articleStatus = ArticleStatus;
 
   @ViewChild('addArticlesModal') addArticlesModal: any;
 
@@ -26,48 +25,11 @@ export class ProjectPageComponent {
     private articleService: ArticleService
   ) {
     this.project = this.route.snapshot.data.project;
-    this.articles = this.route.snapshot.data.articles.map((article: Article) => { return { code: article.code, status: ArticleStatus.SUCCESS, data: article } });
+    this.articles = this.route.snapshot.data.articles;
   }
 
   public addArticlesModalOpen(): void {
     this.addArticlesModal.open();
-  }
-
-  public addArticles(): void {
-    this.codesList = [];
-
-    const list = this.codes.split('\n');
-    list.forEach(c => {
-      const code = c.trim();
-      if(code) this.articles.unshift({ code, status: ArticleStatus.QUEUED });
-    });
-
-    this.syncArticles();
-  }
-
-  public syncArticles(): void {
-    const nextArticle: ArticleBox | undefined = this.articles.find((article: ArticleBox) => article.status === ArticleStatus.QUEUED);
-
-    if(!nextArticle) return;
-
-    /*this.articleService
-      .create(nextArticle.code, this.project.id)
-      .subscribe((article: Article) => {
-        nextArticle.status = ArticleStatus.SUCCESS;
-        nextArticle.data = article;
-        this.syncArticles();
-      }, (error) => {
-        console.log(error);
-        if(error.status === 409) {
-          nextArticle.status = ArticleStatus.DUPLICATE;
-          console.log('conflict');
-        }
-        else if (error.status === 404) {
-          nextArticle.status = ArticleStatus.MISSING;
-          console.log('missing');
-        }
-        this.syncArticles();
-      });*/
   }
 
   public buildProject(): void {
@@ -85,6 +47,14 @@ export class ProjectPageComponent {
 
     this.articleService.update(group, this.updatedArticleId, this.project.id).subscribe();
 
+  }
+
+  public newArticles(articles: Article[]): void {
+    this.articles = articles;
+  }
+
+  public deleteArticle(id: string): void {
+    this.articleService.delete(id, this.project.id).subscribe(data => console.log(data));
   }
 
 }

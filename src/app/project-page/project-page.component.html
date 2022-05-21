@@ -21,20 +21,20 @@
 </header>
 
 <ul class="articles1">
-  <li>
+  <li *ngFor="let article of articles">
+
     <!-- QUEUE -->
-    <div class="article1 QUEUE">
+    <div class="article1 QUEUE" *ngIf="article.status === articleStatus.QUEUE">
       <div class="article1-head">
         <div class="loading"></div>
       </div>
       <div class="article1-body">
-        <h1>2456337</h1>
+        <h1>{{ article.code }}</h1>
       </div>
     </div>
-  </li>
-  <li>
+
     <!-- ERROR -->
-    <div class="article1 ERROR">
+    <div class="article1 ERROR" *ngIf="article.status === articleStatus.ERROR">
       <div class="article1-head">
         <img class="img-error" src="/assets/error-icon.svg">
       </div>
@@ -42,22 +42,9 @@
         <h1>2456337</h1>
       </div>
     </div>
-  </li>
-  <li>
-    <!-- PARTIAL -->
-    <div class="article1 PARTIAL">
-      <div class="article1-head">
-        <img class="img-success" src="https://efobasen.efo.no/API/Produktfiler/Skalert?id=1340570&w=350&h=350&m=3">
-      </div>
-      <div class="article1-body">
-        <h1>3217067</h1>
-        <p>SLV THEO BRACKET SP QPAR51 SPIKE antrasi</p>
-      </div>
-    </div>
-  </li>
-  <li>
+
     <!-- SUCCESS -->
-    <div class="article1 SUCCESS">
+    <div class="article1 SUCCESS" *ngIf="article.status === articleStatus.SUCCESS">
       <div class="article1-head">
         <img class="img-success" src="https://efobasen.efo.no/API/Produktfiler/Skalert?id=1337110&w=350&h=350&m=3">
       </div>
@@ -66,157 +53,8 @@
         <p>Skjøt plast/plast 1kV 4x1,5-4 NE</p>
       </div>
     </div>
-  </li>
-</ul>
-
-<ul class="articles">
-  <li *ngFor="let article of articles">
-
-    <!-- SUCCESS -->
-    <div class="article SUCCESS" [class.PARTIAL]="!article.data.category" *ngIf="article.status === 'SUCCESS'">
-      <div class="article-head">
-        <img [src]="article.data.thumbnail">
-      </div>
-      <div class="article-body">
-        <p>{{ article.data.code }}</p>
-        <p>{{ article.data.name }}</p>
-      </div>
-      <div class="article-foot">
-        <select [(ngModel)]="article.data.category" (ngModelChange)="updatedArticleId = article.data.id; updateArticle($event)">
-          <optgroup label="41 - Basisinstallasjoner for elkraft">
-            <option value="411">411 - Kabelføring</option>
-            <option value="412">412 - Systemer for jording</option>
-            <option value="413">413 - Systemer for lynvern</option>
-            <option value="414">414 - El-bil</option>
-            <option value="415">415</option>
-            <option value="416">416</option>
-            <option value="417">417</option>
-            <option value="418">418</option>
-            <option value="419">419 - Andre basisinstallasjoner for elkraft</option>
-          </optgroup>
-
-          <optgroup label="42 - Høyspent forsyning">
-            <option value="421">421 - Fordelingssystemer</option>
-          </optgroup>
-
-          <optgroup label="43 - Lavspent forsyning">
-            <option value="431">431 - Systemer for elkraftinntak</option>
-            <option value="432">432 - Systemer for hovedfordeling</option>
-            <option value="433">433 - Underfordeling. Elkraftfordeling til alminnelig forbruk</option>
-            <option value="434">434 - Elkraftfordeling til driftstekniske installasjoner</option>
-            <option value="435">435 - Elkraftfordeling til virksomhet</option>
-            <option value="439">439 - Andre deler for lavspent forsyning</option>
-          </optgroup>
-
-          <optgroup label="44 - Lys">
-            <option value="442">442 - Belysningsutstyr</option>
-            <option value="443">443 - Nødlysutstyr</option>
-            <option value="449">449 - Andre deler for installasjon til lys</option>
-          </optgroup>
-
-          <optgroup label="45 - Elvarme">
-            <option value="452">452 - Varmeovner</option>
-            <option value="453">453 - Varmeelementer for innbygging</option>
-            <option value="454">454 - Varmekabler</option>
-            <option value="455">455 - Vannvarmere og elektrokjeler</option>
-            <option value="459">459 - Annen elvarme</option>
-          </optgroup>
-
-          <optgroup label="46 - Reservekraft">
-            <option value="461">461 - Elkraftaggregater</option>
-            <option value="462">462 - Avbruddfri kraftforsyning</option>
-            <option value="463">463 - Akkumulatoranlegg</option>
-            <option value="469">469 - Andre deler</option>
-          </optgroup>
-
-          <optgroup label="51 - Basisinstallasjoner for tele og automatisering">
-            <option value="511">511 - Systemer for kabelføring</option>
-            <option value="512">512 - Jording</option>
-            <option value="514">514 - Inntakskabler for teleanlegg</option>
-            <option value="515">515 - Telefordelinger</option>
-            <option value="519">519 - Andre generelle anlegg for tele og automatisering</option>
-          </optgroup>
-
-          <optgroup label="52 - Integrert kommunikasjon">
-            <option value="521">521 - Kabling for IKT</option>
-          </optgroup>
-
-          <optgroup label="53 - Telefoni og personsøking">
-            <option value="532">532 - Systemer for telefoni</option>
-            <option value="534">534 - Systemer for porttelefoner</option>
-            <option value="535">535 - Systemer for høyttalende hustelefoner</option>
-            <option value="536">536 - Systemer for personsøkning</option>
-            <option value="539">539 - Andre installasjoner for telefoni og personsøkning</option>
-          </optgroup>
-
-          <optgroup label="54 - Alarm og signalsystemer">
-            <option value="542">542 - Brannalarm</option>
-            <option value="543">543 - Adgangskontroll, innbrudds- og overfallsalarm</option>
-            <option value="544">544 - Pasientsignal</option>
-            <option value="545">545 - Uranlegg og tidsregistrering</option>
-            <option value="547">547 - Dørsystem</option>
-            <option value="549">549 - Andre installasjoner for alarm og signal</option>
-          </optgroup>
-
-          <optgroup label="55 - Lyd og bildesystemer">
-            <option value="552">552 - Fellesantenne</option>
-            <option value="553">553 - Internfjernsyn</option>
-            <option value="554">554 - Lyddistribusjonsanlegg</option>
-            <option value="555">555 - Lydanlegg</option>
-            <option value="556">556 - Bilde og AV-utstyr</option>
-            <option value="559">559 - Annen installasjon for lyd og bilde</option>
-          </optgroup>
-
-          <optgroup label="56 - Automatisering">
-            <option value="562">562 - Sentral driftskontroll og automatisering</option>
-            <option value="563">563 - Lokal automatisering</option>
-            <option value="564">564 - Buss-systemer</option>
-            <option value="565">565 - FDVUS: Administrativt system</option>
-            <option value="569">569 - Andre installasjoner for automatisering</option>
-          </optgroup>
-
-          <optgroup label="73 - Utendørsrøranlegg">
-            <option value="731">731 - Utvendørs VA</option>
-            <option value="732">732 - Utendørs varme</option>
-            <option value="733">733 - Utendørs brannslokking</option>
-            <option value="734">734 - Utendørs gassinstallasjon</option>
-            <option value="735">735 - Utendørs kjøling for idrettsbaner</option>
-            <option value="736">736 - Utendørs luftbehandlingsanlegg</option>
-            <option value="737">737 - Utendørs forsyningsanlegg for termisk energi</option>
-            <option value="738">738 - Utendørs fontener og springvann</option>
-            <option value="739">739 - Annen utendørs VVS</option>
-          </optgroup>
-
-          <optgroup label="74 - Utendørs elkraft">
-            <option value="742">742 - Utendørs høyspent forsyning</option>
-            <option value="743">743 - Utendørs lavspent forsyning</option>
-            <option value="744">744 - Utenførs lys</option>
-            <option value="745">745 - Utendørs elvarme</option>
-            <option value="746">746 - Utendørs reservekraft</option>
-            <option value="749">749 - Annen utendørs elkraft</option>
-          </optgroup>
-
-          <optgroup label="75 - Utendørs tele og automatisering">
-            <option value="752">752 - Utendørs integrert kommunikasjon</option>
-            <option value="753">753 - Utendørs telefoni og personsøkning</option>
-            <option value="754">754 - Utendørs alarm og signal</option>
-            <option value="755">755 - Utendørs lyd og bilde</option>
-            <option value="756">756 - Utendørs automatisering</option>
-            <option value="759">759 - Andre installasjoner for utendørs tele og automatisering</option>
-          </optgroup>
-        </select>
-      </div>
-    </div>
-
-    <!-- DUPLICATE -->
-    <div class="article DUPLICATE" *ngIf="article.status === 'DUPLICATE'">
-    </div>
-
-    <!-- MISSING -->
-    <div class="article MISSING" *ngIf="article.status === 'MISSING'">
-    </div>
 
   </li>
 </ul>
 
-<add-articles-modal [projectId]="project.id" #addArticlesModal></add-articles-modal>
+<add-articles-modal [projectId]="project.id" (create)="newArticles($event)" #addArticlesModal></add-articles-modal>

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { ArticleService } from '../../_services/article.service';
-import { Project } from '../../_models/project';
+import { Project, Article } from '../../_models/project';
 
 @Component({
   selector: 'add-articles-modal',
@@ -17,7 +17,7 @@ export class AddArticlesModalComponent {
   public projectId: string = '';
 
   @Output()
-  private add = new EventEmitter<string[]>();
+  private create = new EventEmitter<Article[]>();
 
   constructor(
     private articleService: ArticleService
@@ -32,7 +32,7 @@ export class AddArticlesModalComponent {
   public submit(): void {
     const codes = this.textToList(this.text);
 
-    this.articleService.create(codes, this.projectId).subscribe(data => console.log(data));
+    this.articleService.create(codes, this.projectId).subscribe((articles: Article[]) => this.create.emit(articles));
     /*this.loading = true;
     this.form.markAllAsTouched();
 

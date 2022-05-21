@@ -15,27 +15,17 @@ export enum ProjectStatus {
 export interface Article {
   id: string,
   code: string,
-  name: string,
-  maker: string,
+  name?: string,
+  maker?: string,
   thumbnail?: string,
-  doc: string,
-  category?: string
-}
-
-export interface ArticleBatch {
-  items: Article[],
-  count: number
+  document?: string,
+  class?: string,
+  category?: string,
+  status: ArticleStatus
 }
 
 export enum ArticleStatus {
-  SUCCESS = 'SUCCESS',
-  QUEUED = 'QUEUED',
-  DUPLICATE = 'DUPLICATE',
-  MISSING = 'MISSING'
-}
-
-export interface ArticleBox {
-  code: string,
-  status: ArticleStatus,
-  data?: any
+  QUEUE = 'QUEUE',
+  ERROR = 'ERROR',
+  SUCCESS = 'SUCCESS'
 }
