@@ -26,6 +26,9 @@ export class ProjectPageComponent {
   ) {
     this.project = this.route.snapshot.data.project;
     this.articles = this.route.snapshot.data.articles;
+    for(const x of this.articles) {
+      x.thumbnail = `/assets/thumbnails/${x.code}.jpg`;
+    }
   }
 
   public addArticlesModalOpen(): void {

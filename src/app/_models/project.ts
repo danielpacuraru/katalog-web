@@ -17,15 +17,14 @@ export interface Article {
   code: string,
   name?: string,
   maker?: string,
-  thumbnail?: string,
-  document?: string,
-  class?: string,
   category?: string,
-  status: ArticleStatus
+  group?: string,
+  status: ArticleStatus,
+  thumbnail?: string
 }
 
 export enum ArticleStatus {
   QUEUE = 'QUEUE',
-  ERROR = 'ERROR',
-  SUCCESS = 'SUCCESS'
+  SUCCESS = 'SUCCESS',
+  ERROR = 'ERROR'
 }

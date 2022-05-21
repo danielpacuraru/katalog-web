@@ -20,37 +20,37 @@
   </div>
 </header>
 
-<ul class="articles1">
+<ul class="articles">
   <li *ngFor="let article of articles">
 
     <!-- QUEUE -->
-    <div class="article1 QUEUE" *ngIf="article.status === articleStatus.QUEUE">
-      <div class="article1-head">
+    <div class="article QUEUE" *ngIf="article.status === articleStatus.QUEUE">
+      <div class="article-head">
         <div class="loading"></div>
       </div>
-      <div class="article1-body">
+      <div class="article-body">
         <h1>{{ article.code }}</h1>
       </div>
     </div>
 
     <!-- ERROR -->
-    <div class="article1 ERROR" *ngIf="article.status === articleStatus.ERROR">
-      <div class="article1-head">
+    <div class="article ERROR" *ngIf="article.status === articleStatus.ERROR">
+      <div class="article-head">
         <img class="img-error" src="/assets/error-icon.svg">
       </div>
-      <div class="article1-body">
-        <h1>2456337</h1>
+      <div class="article-body">
+        <h1>{{ article.code }}</h1>
       </div>
     </div>
 
     <!-- SUCCESS -->
-    <div class="article1 SUCCESS" *ngIf="article.status === articleStatus.SUCCESS">
-      <div class="article1-head">
-        <img class="img-success" src="https://efobasen.efo.no/API/Produktfiler/Skalert?id=1337110&w=350&h=350&m=3">
+    <div class="article SUCCESS" *ngIf="article.status === articleStatus.SUCCESS">
+      <div class="article-head">
+        <img class="img-success" [attr.src]="article.thumbnail">
       </div>
-      <div class="article1-body">
-        <h1>1103942</h1>
-        <p>Skjøt plast/plast 1kV 4x1,5-4 NE</p>
+      <div class="article-body">
+        <h1>{{ article.code }}</h1>
+        <p>{{ article.name }}</p>
       </div>
     </div>
 
