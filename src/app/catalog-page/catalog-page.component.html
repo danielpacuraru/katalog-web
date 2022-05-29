@@ -1,0 +1,12 @@
+<section class="katalog" *ngIf="catalog">
+  <div>
+    <h1 class="katalog-title">{{ catalog.name }}</h1>
+    <p class="katalog-text">Created: {{ catalog.date | date }}</p>
+    <p class="katalog-text">File size: {{ catalog.size | bytes }}</p>
+    <a class="katalog-button" [href]="catalog.url">Download (.zip)</a>
+  </div>
+</section>
+
+<section class="katalog" *ngIf="error">
+  <p>No catalog found!</p>
+</section>

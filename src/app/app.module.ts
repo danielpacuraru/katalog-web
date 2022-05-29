@@ -10,9 +10,12 @@ import { TokenInterceptor } from './_services/token.interceptor';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
+import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 
 import { AddProjectModalComponent } from './projects-page/add-project-modal/add-project-modal.component';
 import { AddArticlesModalComponent } from './project-page/add-articles-modal/add-articles-modal.component';
+
+import { BytesPipe } from './_helpers/bytes.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { AddArticlesModalComponent } from './project-page/add-articles-modal/add
     ProjectsPageComponent,
     ProjectPageComponent,
     AddProjectModalComponent,
-    AddArticlesModalComponent
+    AddArticlesModalComponent,
+    CatalogPageComponent,
+    BytesPipe
   ],
   imports: [
     BrowserModule,

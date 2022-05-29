@@ -1,7 +1,7 @@
 <header class="head">
   <div class="head-left">
     <a class="back" routerLink=".."></a>
-    <h1>{{ project.name }}</h1>
+    <h1>{{ project.name }} ({{ articles.length }})</h1>
   </div>
   <div class="head-right">
     <button class="button success" (click)="addArticlesModalOpen()">
