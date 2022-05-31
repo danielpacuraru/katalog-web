@@ -32,22 +32,12 @@ export class AddArticlesModalComponent {
   public submit(): void {
     const codes = this.textToList(this.text);
 
-    this.articleService.create(codes, this.projectId).subscribe((articles: Article[]) => this.create.emit(articles));
-    /*this.loading = true;
-    this.form.markAllAsTouched();
-
-    if(this.form.invalid) {
-      this.loading = false;
-      return;
-    }
-
-    this.projectService
-      .create(this.form.value.name)
-      .subscribe((project: Project) => {
-        this.create.emit(project);
-        this.loading = false;
+    this.articleService
+      .create(codes, this.projectId)
+      .subscribe((articles: Article[]) => {
+        this.create.emit(articles);
         this.show = false;
-      });*/
+      });
   }
 
   public close(): void {

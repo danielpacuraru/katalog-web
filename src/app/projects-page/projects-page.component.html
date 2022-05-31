@@ -17,6 +17,8 @@
     <li *ngFor="let project of projects">
       <a class="project" [routerLink]="project.id">
         <h2>{{ project.name }}</h2>
+        <p>{{ project.articles }} Articles</p>
+        <p>{{ project.createdAt | date }}</p>
       </a>
     </li>
     <li *ngIf="projects.length < 1"><div class="project-empty"></div></li>

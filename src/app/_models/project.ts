@@ -1,9 +1,9 @@
 export interface Project {
   id: string,
   name: string,
-  title: string,
-  description: string,
-  status: ProjectStatus
+  articles: number,
+  status: ProjectStatus,
+  createdAt: Date
 }
 
 export enum ProjectStatus {

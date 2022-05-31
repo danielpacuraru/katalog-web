@@ -26,9 +26,6 @@ export class ProjectPageComponent {
   ) {
     this.project = this.route.snapshot.data.project;
     this.articles = this.route.snapshot.data.articles;
-    for(const x of this.articles) {
-      x.thumbnail = `/assets/thumbnails/${x.code}.jpg`;
-    }
   }
 
   public addArticlesModalOpen(): void {
@@ -47,13 +44,12 @@ export class ProjectPageComponent {
   public updatedArticleId: string = '';
 
   public updateArticle(group: string) {
-
     this.articleService.update(group, this.updatedArticleId, this.project.id).subscribe();
-
   }
 
   public newArticles(articles: Article[]): void {
-    this.articles = articles;
+
+    articles.forEach(a => this.articles.unshift(a));
   }
 
   public deleteArticle(id: string): void {
