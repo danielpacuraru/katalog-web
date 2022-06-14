@@ -142,9 +142,15 @@ ul, ol {
   top: -1px;
 }
 
+.dropdown {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
 
-
-
+.dropdown nav {
+  display: none;
+}
 
 
 
@@ -246,7 +252,10 @@ fieldset input.ng-invalid.ng-touched ~ .errors {
   color: #22303A;
 }
 
-.head .button + .button {
+.head .button + .button,
+.head .button + .dropdown,
+.head .dropdown + .button,
+.head .dropdown + .dropdown {
   margin-left: 12px;
 }
 

@@ -15,6 +15,7 @@ import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 import { AddProjectModalComponent } from './projects-page/add-project-modal/add-project-modal.component';
 import { AddArticlesModalComponent } from './project-page/add-articles-modal/add-articles-modal.component';
 
+import { DropdownDirective } from './_helpers/dropdown.directive';
 import { BytesPipe } from './_helpers/bytes.pipe';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { BytesPipe } from './_helpers/bytes.pipe';
     AddProjectModalComponent,
     AddArticlesModalComponent,
     CatalogPageComponent,
+    DropdownDirective,
     BytesPipe
   ],
   imports: [

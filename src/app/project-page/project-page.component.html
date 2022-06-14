@@ -1,30 +1,89 @@
 <header class="head">
   <div class="head-left">
     <a class="back" routerLink=".."></a>
-    <h1>{{ project.name }} ({{ articles.length }})</h1>
+    <h1>{{ project.name }}</h1>
   </div>
   <div class="head-right">
-    <button class="button success" (click)="addArticlesModalOpen()">
-      <svg viewBox="0 0 15 18" width="15" height="18">
-        <path fill="#fff" fill-rule="evenodd" d="M7.5 1.5a.75.75 0 0 1 .75.75V8H14a.75.75 0 0 1 .75.75.75.75 0 0 1-.75.75H8.25v5.75a.75.75 0 0 1-.75.75.75.75 0 0 1-.75-.75V9.5H1a.75.75 0 0 1-.75-.75A.75.75 0 0 1 1 8h5.75V2.25a.75.75 0 0 1 .75-.75z"/>
-      </svg>
-      <span>Add articles</span>
-    </button>
     <button class="button warning" [class.loading]="project.status === 'QUEUE'" [disabled]="project.status === 'QUEUE'" (click)="buildProject()" *ngIf="project.status !== 'READY'">
       <svg viewBox="0 0 14 18" width="14" height="18">
         <path fill="#fff" fill-rule="evenodd" d="M3.906 1.719c-.009.003-.017.008-.024.013a5.43 5.43 0 0 0-2.32 4.455c0 .959.253 1.901.734 2.73s1.174 1.517 2.006 1.992c.428.245.737.716.706 1.261v.002l-.238 4.544c-.008.149-.074.289-.185.389a.56.56 0 0 1-.794-.041.56.56 0 0 1-.144-.406l.238-4.546v-.003c.004-.068-.035-.161-.141-.222A6.56 6.56 0 0 1 .438 6.188c-.001-1.055.253-2.095.741-3.031S2.372 1.415 3.237.811A1.16 1.16 0 0 1 4.518.763c.363.219.607.626.607 1.095v3.536c0 .032.008.064.024.091s.038.051.065.068l1.688 1.039c.06.037.136.037.197 0l1.688-1.039c.027-.017.05-.04.065-.068s.024-.059.024-.091V1.859c0-.469.244-.877.607-1.096a1.16 1.16 0 0 1 1.281.048c.865.605 1.571 1.409 2.058 2.346s.741 1.976.741 3.032a6.56 6.56 0 0 1-3.307 5.698c-.105.061-.145.155-.141.222v.003l.238 4.547c.004.074-.007.148-.032.217a.56.56 0 0 1-.112.189c-.05.055-.109.099-.176.131a.56.56 0 0 1-.43.022c-.07-.025-.134-.063-.189-.112s-.099-.109-.131-.176-.05-.139-.054-.213l-.238-4.543v-.002c-.031-.545.277-1.016.705-1.261.833-.475 1.525-1.163 2.007-1.992s.735-1.772.735-2.731a5.43 5.43 0 0 0-2.32-4.455c-.007-.006-.015-.01-.024-.013l-.008-.001c-.002 0-.011 0-.023.007-.027.017-.063.059-.063.133v3.534a1.31 1.31 0 0 1-.167.64c-.109.196-.267.36-.458.477L7.688 7.549c-.207.127-.445.195-.688.195s-.481-.067-.688-.195L4.625 6.511c-.191-.117-.348-.282-.458-.477S4 5.618 4 5.394V1.858c0-.074-.036-.116-.063-.132-.007-.005-.015-.008-.023-.008h-.007v.001z"/>
       </svg>
       <span>Build project</span>
     </button>
-    <button class="button primary" (click)="downloadProject()" *ngIf="project.status === 'READY'">Download project</button>
+    <div class="dropdown">
+      <button class="button" dropdown>More</button>
+      <nav>
+        <a>Delete Project</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="catalog">
+  <div class="copy">
+    <input type="text" readonly [(ngModel)]="copy">
+    <button class="button">Copy</button>
+  </div>
+  <div class="dl">
+    <a class="button success">Download Project</a>
+  </div>
+</div>
+
+<div class="stats">
+  <ul class="comp">
+    <li class="primary">
+      <p>TOTAL</p>
+      <p>{{ articles.length }}</p>
+    </li>
+    <li>
+      <i class="success"></i>
+      <p>SUCCESS</p>
+      <p>{{ successCount }}</p>
+    </li>
+    <li>
+      <i class="warning"></i>
+      <p>INCOMPLETE</p>
+      <p>{{ incompleteCount }}</p>
+    </li>
+    <li>
+      <i class="error"></i>
+      <p>NOT FOUND</p>
+      <p>{{ errorCount }}</p>
+    </li>
+    <li *ngIf="queueCount">
+      <i class="queue"></i>
+      <p>IN QUEUE</p>
+      <p>{{ queueCount }}</p>
+    </li>
+  </ul>
+</div>
+
+<header class="head" style="margin-top: 40px">
+  <div class="head-left">
+    <h1>Articles</h1>
+  </div>
+  <div class="head-right">
+    <button class="button success" (click)="addArticlesModal.open()">
+      <svg viewBox="0 0 15 18" width="15" height="18">
+        <path fill="#fff" fill-rule="evenodd" d="M7.5 1.5a.75.75 0 0 1 .75.75V8H14a.75.75 0 0 1 .75.75.75.75 0 0 1-.75.75H8.25v5.75a.75.75 0 0 1-.75.75.75.75 0 0 1-.75-.75V9.5H1a.75.75 0 0 1-.75-.75A.75.75 0 0 1 1 8h5.75V2.25a.75.75 0 0 1 .75-.75z"/>
+      </svg>
+      <span>Add articles</span>
+    </button>
   </div>
 </header>
 
 <ul class="articles">
   <li *ngFor="let article of articles">
-
-    <!-- QUEUE -->
-    <div class="article QUEUE" *ngIf="article.status === articleStatus.QUEUE">
+    <div class="article">
+      <div class="article-image">
+        <div>
+        <img [attr.src]="article.thumbnail">
+      </div>
+      </div>
+      <div class="article-data">
+      </div>
+    </div>
+    <!-- <div class="article QUEUE" *ngIf="article.status === articleStatus.QUEUE">
       <div class="article-head">
         <div class="loading"></div>
       </div>
@@ -32,8 +91,6 @@
         <h1>{{ article.code }}</h1>
       </div>
     </div>
-
-    <!-- ERROR -->
     <div class="article ERROR" *ngIf="article.status === articleStatus.ERROR">
       <div class="article-head">
         <img class="img-error" src="/assets/error-icon.svg">
@@ -42,9 +99,7 @@
         <h1>{{ article.code }}</h1>
       </div>
     </div>
-
-    <!-- SUCCESS -->
-    <div class="article SUCCESS" *ngIf="article.status === articleStatus.SUCCESS">
+    <div class="article PARTIAL" *ngIf="article.status === articleStatus.SUCCESS && !article.group">
       <div class="article-head">
         <img class="img-success" [attr.src]="article.thumbnail">
       </div>
@@ -53,8 +108,23 @@
         <p>{{ article.name }}</p>
       </div>
     </div>
-
+    <div class="article SUCCESS" *ngIf="article.status === articleStatus.SUCCESS && article.group">
+      <div class="article-head">
+        <img class="img-success" [attr.src]="article.thumbnail">
+      </div>
+      <div class="article-body">
+        <h1>{{ article.code }}</h1>
+        <p>{{ article.name }}</p>
+      </div>
+    </div> -->
   </li>
 </ul>
 
-<add-articles-modal [projectId]="project.id" (create)="newArticles($event)" #addArticlesModal></add-articles-modal>
+<div class="articles-loader" *ngIf="queueCount">
+  <div class="loadx">
+    <div class="loadx-bar" [style.width.%]="percentageValue"></div>
+    <div class="loadx-value">{{ percentageValue }}</div>
+  </div>
+</div>
+
+<add-articles-modal [projectId]="project.id" (create)="addArticles($event)" #addArticlesModal></add-articles-modal>

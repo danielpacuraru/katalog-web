@@ -39,4 +39,9 @@ export class ProjectService {
       .get<any>(`${environment.apiUrl}/projects/${id}/catalog`, { responseType: 'blob' as 'json' });
   }
 
+  public delete(id: string): Observable<void> {
+    return this.http
+      .delete<void>(`${environment.apiUrl}/projects/${id}`);
+  }
+
 }
