@@ -14,7 +14,9 @@ import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 
 import { AddProjectModalComponent } from './projects-page/add-project-modal/add-project-modal.component';
 import { AddArticlesModalComponent } from './project-page/add-articles-modal/add-articles-modal.component';
+import { EditArticleModalComponent } from './project-page/edit-article-modal/edit-article-modal.component';
 
+import { ConfirmComponent } from './_components/confirm/confirm.component';
 import { DropdownDirective } from './_helpers/dropdown.directive';
 import { BytesPipe } from './_helpers/bytes.pipe';
 
@@ -27,7 +29,9 @@ import { BytesPipe } from './_helpers/bytes.pipe';
     ProjectPageComponent,
     AddProjectModalComponent,
     AddArticlesModalComponent,
+    EditArticleModalComponent,
     CatalogPageComponent,
+    ConfirmComponent,
     DropdownDirective,
     BytesPipe
   ],

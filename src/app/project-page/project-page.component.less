@@ -136,6 +136,9 @@
   padding: 4px;
   border-radius: 6px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  position: relative;
 }
 
 .article-image {
@@ -145,10 +148,9 @@
   padding: 4px;
   border-radius: 4px;
   box-sizing: border-box;
-  float: left;
 }
 
-.article-image div {
+.article-image > div {
   width: 100%;
   height: 100%;
   position: relative;
@@ -162,6 +164,112 @@
   top: 50%;
   transform: translate(-50%, -50%);
   mix-blend-mode: multiply;
+}
+
+.article-data {
+  flex: 1;
+  padding: 2px 2px 2px 8px;
+  box-sizing: border-box;
+}
+
+.article-data h2 {
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+  font: 600 15px/20px var(--font);
+  color: #2D3E4D;
+}
+
+.article-data p {
+  margin: 4px 0;
+  font: 500 14px/20px var(--font);
+  color: #697A87;
+}
+
+.article-data h6 {
+  padding-left: 16px;
+  position: relative;
+  font: 500 14px/20px var(--font);
+  color: #4DB142;
+}
+
+.article-data h6:before {
+  content: '';
+  background: #4DB142;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -6px;
+}
+
+.article-loading {
+  background: #DFDFF4;
+  width: 92px;
+  height: 92px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.article-loading-icon {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #A79CDF;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  margin-left: -30px;
+  top: 50%;
+  margin-top: -30px;
+  animation: anim-rotate 1.5s linear infinite;
+}
+
+.article-error {
+  background: #F8E4E7 url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MiIgaGVpZ2h0PSI5MiIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiB4bWxuczp2PSJodHRwczovL3ZlY3RhLmlvL25hbm8iPjxwYXRoIGQ9Ik00NS4zNDggMjMuMDRjLTEuMzU2LjE5OS0yLjQzLjg0Ni0zLjE2OCAxLjkwOS0uNjQzLjkyNy0yMC43NjggMzYuNzk3LTIwLjk2MiAzNy4zNjItLjQyMiAxLjIzMS0uMjE2IDIuOTAzLjQ5NiA0LjAyNWE0LjczIDQuNzMgMCAwIDAgMy4zOCAyLjEzYy41MjQuMDY4IDcuNTc2LjA5MiAyMS4yOTEuMDczbDIxLjA0Ni0uMjA5YzEuNDQ5LS40ODYgMi41MDEtMS4zNTUgMy4wODItMi41NDZzLjY0NS0yLjUyMS4xNzktMy43MTRjLS4xMjMtLjMxNi0xNS43MzYtMjguMTMzLTIwLjEyLTM1Ljg0OC0uODM5LTEuNDc2LTEuNDA0LTIuMTQ4LTIuMTgtMi41OTEtLjg2Ny0uNDk1LTIuMDgzLS43MzEtMy4wNDQtLjU5em0xMC44NTEgMjIuNjUybDEwLjE1NiAxOC4xMDZjMCAuMDM0LTkuMTYzLjA2Mi0yMC4zNjEuMDYycy0yMC4zNjEtLjAyOC0yMC4zNjEtLjA2MmMwLS4wOTcgMjAuMzA2LTM2LjE1MSAyMC4zNjEtMzYuMTUxLjAyNyAwIDQuNjE5IDguMTIgMTAuMjA1IDE4LjA0NXoiIGZpbGw9IiNmMzVmNmYiLz48cGF0aCBkPSJNNTYuMTk4IDQ1LjY5M2wxMC4xNTYgMTguMTA2YzAgLjAzNC05LjE2My4wNjItMjAuMzYxLjA2MnMtMjAuMzYxLS4wMjgtMjAuMzYxLS4wNjJjMC0uMDk3IDIwLjMwNi0zNi4xNTEgMjAuMzYxLTM2LjE1MS4wMjcgMCA0LjYxOSA4LjEyIDEwLjIwNSAxOC4wNDV6IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTQ1LjMyNyA0MC41NjVjLTEuMzc2LjI4Ni0yLjM4NCAxLjQyMS0yLjYxMiAyLjk0LS4wNDcuMzE2LjExNSAxLjY0MS41ODIgNC43NDRsLjc1NCA0LjY0OGMuNDYgMS40ODcgMi4zMjQgMS45MDEgMy4zODUuNzUuMjE1LS4yMzMuNDM5LS41NzUuNDk4LS43NTlzLjQtMi4yNzMuNzU4LTQuNjQyYy43MzctNC44OC43NDQtNS4wNzcuMjA2LTYuMDYxLS42NjctMS4yMi0yLjE4NS0xLjkwOS0zLjU3LTEuNjIxem0tLjE5OCAxNS43NjdjLS42NDguMzI5LS45NDYuODUyLS45NDYgMS42NTUgMCAuNzQ0LjIxOCAxLjE2Ni44MTYgMS41NzUuNDkzLjMzOCAxLjQ5Ni4zMzggMS45OSAwIDEuMTE3LS43NjUgMS4xNDktMi4zOTguMDYxLTMuMTE4YTIuMDEgMi4wMSAwIDAgMC0xLjkyMS0uMTEzeiIgZmlsbD0iIzJkM2U0ZCIvPjwvc3ZnPg==') no-repeat center;
+  width: 92px;
+  height: 92px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.article-pill {
+  padding: 0 4px;
+  border-radius: 2px;
+  display: inline-block;
+  font: 600 12px/18px var(--font);
+  letter-spacing: 0.3px;
+  color: white;
+}
+.article-pill.loading { background: #826FD1; }
+.article-pill.success { background: #4DB142; }
+.article-pill.partial { background: #F9AA38; }
+.article-pill.error { background: #F33F51; }
+
+.article-actions {
+  position: absolute;
+  right: 4px;
+  bottom: -4px;
+}
+
+.article-actions a {
+  padding: 8px;
+  display: inline-block;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.12s ease-out;
+}
+
+.article:hover .article-actions a {
+  opacity: 0.35;
+}
+
+.article:hover .article-actions a:hover {
+  opacity: 1;
 }
 
 

@@ -1,0 +1,9 @@
+<div class="confirm" *ngIf="show">
+  <div class="confirm-bg" (click)="no()"></div>
+  <div class="confirm-box">
+    <h2>{{ title }}</h2>
+    <p>{{ text }}</p>
+    <button class="button" (click)="no()">No</button>
+    <button class="button danger" (click)="yes()">Yes</button>
+  </div>
+</div>

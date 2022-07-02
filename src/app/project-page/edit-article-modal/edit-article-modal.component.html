@@ -1,0 +1,14 @@
+<div class="modal" *ngIf="show && article">
+  <div class="modal-bg" (click)="close()"></div>
+  <div class="modal-article">
+    <div class="modal-article-head">
+      <div>
+        <img [attr.src]="article.thumbnail">
+      </div>
+    </div>
+    <div class="modal-article-body">
+      <h2>{{ article.name }}</h2>
+      <p>{{ article.code }} - {{ article.group }}</p>
+    </div>
+  </div>
+</div>

@@ -18,8 +18,6 @@ export class ProjectPageComponent {
   public articleStatus = ArticleStatus;
   public copy: string = 'https';
 
-  @ViewChild('addArticlesModal') addArticlesModal: any;
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -30,6 +28,8 @@ export class ProjectPageComponent {
     this.articles = this.route.snapshot.data.articles;
     this.checkUpdates();
   }
+
+  @ViewChild('confirmDeleteArticle') confirmDeleteArticle: any;
 
   public get successCount(): number { return this.articles.filter(a => a.status === ArticleStatus.SUCCESS && a.group).length; }
   public get incompleteCount(): number { return this.articles.filter(a => a.status === ArticleStatus.SUCCESS && !a.group).length; }
@@ -48,6 +48,10 @@ export class ProjectPageComponent {
           }, 3000);
         });
     }
+  }
+
+  public isArticlePartial(article: Article): boolean {
+    return !article.group;
   }
 
   public addArticles(articles: Article[]): void {
@@ -79,10 +83,22 @@ export class ProjectPageComponent {
     articles.forEach(a => this.articles.unshift(a));
   }*/
 
-  public deleteArticle(id: string): void {
-    this.articleService.delete(id, this.project.id).subscribe(data => console.log(data));
+  public deleteArticle(article: Article): void {
+    /*var result = confirm(`Are you sure you want to delete "${article.name}" ?`);
+    if(result) {
+      this.articleService.delete(article.id, this.project.id).subscribe(data => this.articles = this.articles.filter(a => a.id !== data.id));
+    }*/
+    const title = 'Delete article?';
+    const text = `Article: ${article.name}`;
+    this.confirmDeleteArticle.open(title, text).then(() => this._deleteArticle(article), () => {});
   }
 
-  
+  private _deleteArticle(article: Article): void {
+    this.articleService
+      .delete(article.id, this.project.id)
+      .subscribe((data: Article) => {
+        this.articles = this.articles.filter((article: Article) => article.id !== data.id);
+      });
+  }
 
 }
