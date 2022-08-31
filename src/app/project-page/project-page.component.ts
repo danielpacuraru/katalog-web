@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
+import { groupBy } from 'lodash';
 
 import { ProjectService } from '../_services/project.service';
 import { ArticleService } from '../_services/article.service';
@@ -17,6 +18,8 @@ export class ProjectPageComponent {
   public articles: Article[];
   public articleStatus = ArticleStatus;
   public copy: string = 'https';
+  // public sitemap: any;
+  // public sitemap2: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +30,11 @@ export class ProjectPageComponent {
     this.project = this.route.snapshot.data.project;
     this.articles = this.route.snapshot.data.articles;
     this.checkUpdates();
+
+    // this.sitemap = this.articles.filter((a: Article) => a.group !== undefined);
+    // console.log(this.sitemap);
+    // this.sitemap2 = groupBy(this.sitemap, (a: Article) => a.group);
+    // console.log(this.sitemap2);
   }
 
   @ViewChild('confirmDeleteArticle') confirmDeleteArticle: any;

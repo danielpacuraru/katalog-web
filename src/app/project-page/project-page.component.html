@@ -68,21 +68,29 @@
   </ul>
 </div>
 
+<!-- <ul class="file-system">
+  <li *ngFor="let group of sitemap2 | keyvalue">
+    <p>{{ group.key }}</p>
+    <ul>
+      <li *ngFor="let art of $any(group).value">{{ art.name }}</li>
+    </ul>
+  </li>
+</ul> -->
+
 <ul class="articles">
-  <li>
-    <div class="article">
+  <li *ngFor="let article of articles">
+
+    <div class="article" *ngIf="article.status === articleStatus.QUEUE">
       <div class="article-loading">
         <div class="article-loading-icon"></div>
       </div>
       <div class="article-data">
         <h2>Searching article...</h2>
-        <p>1228195</p>
+        <p>{{ article.code }}</p>
         <h5 class="article-pill loading">LOADING</h5>
       </div>
     </div>
-  </li>
 
-  <li *ngFor="let article of articles">
     <div class="article" *ngIf="article.status === articleStatus.SUCCESS && !isArticlePartial(article)">
       <div class="article-image">
         <div>
@@ -149,40 +157,7 @@
         </nav>
       </div>
     </div>
-    <!-- <div class="article QUEUE" *ngIf="article.status === articleStatus.QUEUE">
-      <div class="article-head">
-        <div class="loading"></div>
-      </div>
-      <div class="article-body">
-        <h1>{{ article.code }}</h1>
-      </div>
-    </div>
-    <div class="article ERROR" *ngIf="article.status === articleStatus.ERROR">
-      <div class="article-head">
-        <img class="img-error" src="/assets/error-icon.svg">
-      </div>
-      <div class="article-body">
-        <h1>{{ article.code }}</h1>
-      </div>
-    </div>
-    <div class="article PARTIAL" *ngIf="article.status === articleStatus.SUCCESS && !article.group">
-      <div class="article-head">
-        <img class="img-success" [attr.src]="article.thumbnail">
-      </div>
-      <div class="article-body">
-        <h1>{{ article.code }}</h1>
-        <p>{{ article.name }}</p>
-      </div>
-    </div>
-    <div class="article SUCCESS" *ngIf="article.status === articleStatus.SUCCESS && article.group">
-      <div class="article-head">
-        <img class="img-success" [attr.src]="article.thumbnail">
-      </div>
-      <div class="article-body">
-        <h1>{{ article.code }}</h1>
-        <p>{{ article.name }}</p>
-      </div>
-    </div> -->
+
   </li>
 </ul>
 
