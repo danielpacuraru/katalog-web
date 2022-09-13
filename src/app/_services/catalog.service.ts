@@ -19,4 +19,9 @@ export class CatalogService {
       .get<Catalog>(`${environment.apiUrl}/projects/${id}/catalog`);
   }
 
+  public build(id: string): Observable<Catalog> {
+    return this.http
+      .post<Catalog>(`${environment.apiUrl}/projects/${id}/catalog`, {});
+  }
+
 }

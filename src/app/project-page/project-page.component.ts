@@ -2,10 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import { groupBy } from 'lodash';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 import { ProjectService } from '../_services/project.service';
 import { ArticleService } from '../_services/article.service';
-import { Project, Article, ArticleStatus } from '../_models/project';
+import { CatalogService } from '../_services/catalog.service';
+import { Project, Article, ArticleStatus, Catalog } from '../_models/project';
 
 @Component({
   selector: 'project-page',
@@ -16,25 +18,22 @@ export class ProjectPageComponent {
 
   public project: Project;
   public articles: Article[];
+  public catalog: Catalog | null = null;
   public articleStatus = ArticleStatus;
   public copy: string = 'https';
-  // public sitemap: any;
-  // public sitemap2: any;
+  public building: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private projectService: ProjectService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private catalogService: CatalogService
   ) {
     this.project = this.route.snapshot.data.project;
     this.articles = this.route.snapshot.data.articles;
+    this.catalogService.get(this.project.id).subscribe((catalog: Catalog) => this.catalog = catalog);
     this.checkUpdates();
-
-    // this.sitemap = this.articles.filter((a: Article) => a.group !== undefined);
-    // console.log(this.sitemap);
-    // this.sitemap2 = groupBy(this.sitemap, (a: Article) => a.group);
-    // console.log(this.sitemap2);
   }
 
   @ViewChild('confirmDeleteArticle') confirmDeleteArticle: any;
@@ -58,6 +57,14 @@ export class ProjectPageComponent {
     }
   }
 
+  public get downloadLink(): string {
+    if(this.catalog) {
+      return 'https://' + this.catalog.url;
+    }
+
+    return '';
+  }
+
   public isArticlePartial(article: Article): boolean {
     return !article.group;
   }
@@ -68,7 +75,8 @@ export class ProjectPageComponent {
   }
 
   public buildProject(): void {
-    this.projectService.build(this.project.id).subscribe();
+    this.building = true;
+    this.catalogService.build(this.project.id).subscribe((catalog: Catalog) => { this.catalog = catalog; this.building = false; });
   }
 
   public downloadProject(): void {

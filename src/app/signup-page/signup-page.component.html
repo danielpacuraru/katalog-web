@@ -1,0 +1,25 @@
+<form class="signup-form" [formGroup]="signupForm" (ngSubmit)="signupFormSubmit()">
+  <fieldset>
+    <label for="email">Email Address</label>
+    <input id="email" type="email" formControlName="email">
+    <ul>
+      <li *ngIf="f.email.errors?.required">Email Address is required.</li>
+      <li *ngIf="f.email.errors?.email">Email Address is not valid.</li>
+    </ul>
+  </fieldset>
+  <fieldset>
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password">
+    <ul>
+      <li *ngIf="f.password.errors?.required">Password is required.</li>
+    </ul>
+  </fieldset>
+  <fieldset>
+    <label for="name">Name</label>
+    <input id="name" type="text" formControlName="name">
+    <ul>
+      <li *ngIf="f.name.errors?.required">Name is required.</li>
+    </ul>
+  </fieldset>
+  <button type="submit" class="button primary" [class.loading]="signupFormLoading" [disabled]="signupFormLoading">Sign Up</button>
+</form>

@@ -28,3 +28,10 @@ export enum ArticleStatus {
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR'
 }
+
+export interface Catalog {
+  name: string;
+  url: string;
+  size: number;
+  date: Date;
+}

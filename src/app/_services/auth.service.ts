@@ -27,6 +27,11 @@ export class AuthService {
       }));
   }
 
+  public signup(email: string, password: string, name: string) {
+    return this.http
+      .post(`${environment.apiUrl}/signup`, { email, password, name });
+  }
+
   public me(): Observable<User> {
     return this.http
       .get<User>(`${environment.apiUrl}/me`);

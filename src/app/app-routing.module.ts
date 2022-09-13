@@ -8,6 +8,7 @@ import { ProjectPageComponent } from './project-page/project-page.component';
 import { ProjectResolver } from './project-page/project.resolver';
 import { ArticlesResolver } from './project-page/articles.resolver';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { SignupPageComponent } from './signup-page/signup-page.component';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 
 const routes: Routes = [
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent
+  },
+  {
+    path: 'signup',
+    component: SignupPageComponent
   },
   {
     path: 'catalog/:uuid',
