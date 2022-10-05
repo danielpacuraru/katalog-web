@@ -17,7 +17,6 @@ export interface Article {
   code: string,
   name?: string,
   maker?: string,
-  category?: string,
   group?: string,
   status: ArticleStatus,
   thumbnail?: string

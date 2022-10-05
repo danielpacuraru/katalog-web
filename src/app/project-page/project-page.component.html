@@ -77,6 +77,16 @@
   </li>
 </ul> -->
 
+<!-- <h1>Error</h1>
+<ng-container *ngFor="let article of articles">
+  <p *ngIf="article.status === articleStatus.ERROR">{{ article.code }}</p>
+</ng-container>
+
+<h1>Partial</h1>
+<ng-container *ngFor="let article of articles">
+  <p *ngIf="article.status === articleStatus.SUCCESS && isArticlePartial(article)">{{ article.code }}</p>
+</ng-container> -->
+
 <ul class="articles">
   <li *ngFor="let article of articles">
 

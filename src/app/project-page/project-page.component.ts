@@ -77,6 +77,10 @@ export class ProjectPageComponent {
   public buildProject(): void {
     this.building = true;
     this.catalogService.build(this.project.id).subscribe((catalog: Catalog) => { this.catalog = catalog; this.building = false; });
+
+    //this.catalogService.build('63209a60c7fb66d1cba4bb1e').subscribe();
+    //this.catalogService.build('63209a60c7fb66d1cba4bb1e').subscribe();
+    //this.catalogService.build('6321882dcdd4956768f5d733').subscribe();
   }
 
   public downloadProject(): void {
