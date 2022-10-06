@@ -28,18 +28,7 @@ export class SignupPageComponent {
   }
 
   public signupFormSubmit(): void {
-    this.authService
-      .signup(this.signupForm.value.email, this.signupForm.value.password, this.signupForm.value.name)
-      .subscribe();
-
-      this.authService
-      .signup(this.signupForm.value.email, this.signupForm.value.password, this.signupForm.value.name)
-      .subscribe();
-
-      this.authService
-      .signup(this.signupForm.value.email, this.signupForm.value.password, this.signupForm.value.name)
-      .subscribe();
-    /*this.signupForm.markAllAsTouched();
+    this.signupForm.markAllAsTouched();
     if (this.signupForm.invalid) { return; }
 
     this.signupFormLoading = true;
@@ -48,12 +37,11 @@ export class SignupPageComponent {
       .signup(this.signupForm.value.email, this.signupForm.value.password, this.signupForm.value.name)
       .subscribe(() => {
         this.router.navigateByUrl('/');
-        this.loginFormLoading = false;
+        this.signupFormLoading = false;
       }, () => {
-        this.loginFormError = true;
-        this.loginFormLoading = false;
-        console.log('done');
-      });*/
+        this.signupFormError = true;
+        this.signupFormLoading = false;
+      });
   }
 
   public get f() { return this.signupForm.controls; }
