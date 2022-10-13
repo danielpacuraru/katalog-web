@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as FileSaver from 'file-saver';
 import { groupBy } from 'lodash';
@@ -14,14 +14,15 @@ import { Project, Article, ArticleStatus, Catalog } from '../_models/project';
   templateUrl: './project-page.component.html',
   styleUrls: ['./project-page.component.less']
 })
-export class ProjectPageComponent {
+export class ProjectPageComponent implements OnDestroy {
 
   public project: Project;
   public articles: Article[];
   public catalog: Catalog | null = null;
   public articleStatus = ArticleStatus;
-  public copy: string = 'https';
   public building: boolean = false;
+  public catalogSync: boolean = false;
+  public active: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,10 +31,35 @@ export class ProjectPageComponent {
     private articleService: ArticleService,
     private catalogService: CatalogService
   ) {
+    this.active = true;
     this.project = this.route.snapshot.data.project;
     this.articles = this.route.snapshot.data.articles;
-    this.catalogService.get(this.project.id).subscribe((catalog: Catalog) => this.catalog = catalog);
     this.checkUpdates();
+
+    this.syncCatalog();
+    
+  }
+
+  ngOnDestroy() {
+    this.active = false;
+  }
+
+  private syncCatalog(): void {
+    if(!this.active) return;
+    this.catalogService
+      .get(this.project.id)
+      .subscribe((catalog: Catalog) => {
+        this.catalog = catalog;
+        if(catalog?.status === 'QUEUE') {
+          this.catalogSync = true;
+          setTimeout(() => {
+            this.syncCatalog();
+          }, 2500);
+        }
+        else {
+          this.catalogSync = false;
+        }
+      });
   }
 
   @ViewChild('confirmDeleteArticle') confirmDeleteArticle: any;
@@ -57,14 +83,6 @@ export class ProjectPageComponent {
     }
   }
 
-  public get downloadLink(): string {
-    if(this.catalog) {
-      return 'https://' + this.catalog.url;
-    }
-
-    return '';
-  }
-
   public isArticlePartial(article: Article): boolean {
     return !article.group;
   }
@@ -75,12 +93,11 @@ export class ProjectPageComponent {
   }
 
   public buildProject(): void {
-    this.building = true;
-    this.catalogService.build(this.project.id).subscribe((catalog: Catalog) => { this.catalog = catalog; this.building = false; });
+    this.catalogSync = true;
 
-    //this.catalogService.build('63209a60c7fb66d1cba4bb1e').subscribe();
-    //this.catalogService.build('63209a60c7fb66d1cba4bb1e').subscribe();
-    //this.catalogService.build('6321882dcdd4956768f5d733').subscribe();
+    this.catalogService
+      .build(this.project.id)
+      .subscribe(() => this.syncCatalog());
   }
 
   public downloadProject(): void {

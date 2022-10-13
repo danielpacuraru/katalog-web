@@ -33,4 +33,5 @@ export interface Catalog {
   url: string;
   size: number;
   date: Date;
+  status: string;
 }
