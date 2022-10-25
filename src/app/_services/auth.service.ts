@@ -46,4 +46,9 @@ export class AuthService {
     this.router.navigateByUrl('/login');
   }
 
+  public charge(token: string) {
+    return this.http
+      .post(`${environment.apiUrl}/pay`, { paymentMethodId: token });
+  }
+
 }

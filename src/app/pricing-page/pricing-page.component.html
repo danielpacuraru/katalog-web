@@ -1,0 +1,22 @@
+<header class="head">
+  <div class="head-left">
+    <h1>Pricing</h1>
+  </div>
+  <div class="head-right">
+  </div>
+</header>
+
+<div class="row">
+  <form novalidate (ngSubmit)="goPay()" [formGroup]="stripeTest">
+    <ngx-stripe-card [options]="cardOptions"></ngx-stripe-card>
+    <button type="submit">GO</button>
+  </form>
+</div>
+
+
+<!-- 
+<form novalidate (ngSubmit)="goPay()" [formGroup]="stripeTest">
+  <input type="text" formControlName="name" placeholder="Jane Doe">
+  <ngx-stripe-card [options]="cardOptions"></ngx-stripe-card>
+  <button type="submit">GO</button>
+</form> -->

@@ -9,6 +9,7 @@ import { ProjectResolver } from './project-page/project.resolver';
 import { ArticlesResolver } from './project-page/articles.resolver';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
+import { PricingPageComponent } from './pricing-page/pricing-page.component';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         redirectTo: 'projects'
+      },
+      {
+        path: 'pricing',
+        component: PricingPageComponent
       },
       {
         path: 'projects',

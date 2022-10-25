@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { NgxStripeModule } from 'ngx-stripe';
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +13,7 @@ import { AuthInterceptor } from './_services/auth.interceptor';
 import { TokenInterceptor } from './_services/token.interceptor';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
+import { PricingPageComponent } from './pricing-page/pricing-page.component';
 import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
@@ -29,6 +32,7 @@ import { BytesPipe } from './_helpers/bytes.pipe';
     MainComponent,
     LoginPageComponent,
     SignupPageComponent,
+    PricingPageComponent,
     ProjectsPageComponent,
     ProjectPageComponent,
     AddProjectModalComponent,
@@ -45,7 +49,8 @@ import { BytesPipe } from './_helpers/bytes.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ClipboardModule
+    ClipboardModule,
+    NgxStripeModule.forRoot(environment.stripeKey),
   ],
   providers: [
     {
