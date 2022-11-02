@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import { StripeCardElementOptions } from '@stripe/stripe-js';
+import { environment } from '../../../environments/environment';
+
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'pay-access-modal',
@@ -27,33 +30,55 @@ export class PayAccessModalComponent {
   }
 
   public loading: boolean = false;
+  public error: string = '';
 
-  constructor(private stripeService: StripeService) { }
+  constructor(
+    private stripeService: StripeService,
+    private authService: AuthService
+  ) { }
 
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
 
+  onChange() {
+    this.error = '';
+  }
+
   open(type: string): void {
     this.type = type;
+    this.error = '';
+    this.loading = false;
     this.show = true;
   }
 
   close(): void {
     this.show = false;
+    this.loading = false;
   }
 
   buy() {
+    this.loading = true;
+    this.error = '';
     this.stripeService
-      .createPaymentMethod({type: 'card', card: this.card.getCard() })
+      .createPaymentMethod({
+        type: 'card',
+        card: this.card.element
+      })
       .subscribe((result) => {
-        if (result.paymentMethod) {
-          const method = result.paymentMethod.id;
-          // Use the token
-          console.log(method);
-
-
-        } else if (result.error) {
-          // Error creating the token
-          console.log(result.error.message);
+        if(result.paymentMethod) {
+          const peymentMethodId = result.paymentMethod.id;
+          this.authService
+            .pay(peymentMethodId)
+            .subscribe((data: any) => {
+              console.log(data);
+              this.loading = false;
+            }, (err) => {
+              this.error = 'Card declined!';
+              this.loading = false;
+            });
+        }
+        else if(result.error) {
+          this.error = '' + result.error.message;
+          this.loading = false;
         }
       });
   }
