@@ -109,6 +109,10 @@ export class ProjectPageComponent implements OnDestroy {
     this.projectService.delete(this.project.id).subscribe(() => this.router.navigate(['..'], { relativeTo: this.route }));
   }
 
+  public resyncProject(): void {
+    this.projectService.resync(this.project.id).subscribe();
+  }
+
   /*public updatedArticleId: string = '';
 
   public updateArticle(group: string) {

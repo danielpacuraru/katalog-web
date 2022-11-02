@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import { StripeCardElementOptions } from '@stripe/stripe-js';
+import { environment } from '../../environments/environment';
 
 import { AuthService } from '../_services/auth.service';
 
@@ -61,6 +62,17 @@ export class PricingPageComponent {
         }
       });
 
+  }
+
+
+  @ViewChild('payAccessModal') payAccessModal: any;
+
+  buyWeeklyAccess() {
+    this.payAccessModal.open('Weekly');
+  }
+
+  buyMonthlyAccess() {
+    this.payAccessModal.open('Monthly');
   }
 
 }

@@ -18,6 +18,7 @@ import { ProjectsPageComponent } from './projects-page/projects-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 
+import { PayAccessModalComponent } from './pricing-page/pay-access-modal/pay-access-modal.component';
 import { AddProjectModalComponent } from './projects-page/add-project-modal/add-project-modal.component';
 import { AddArticlesModalComponent } from './project-page/add-articles-modal/add-articles-modal.component';
 import { EditArticleModalComponent } from './project-page/edit-article-modal/edit-article-modal.component';
@@ -35,6 +36,7 @@ import { BytesPipe } from './_helpers/bytes.pipe';
     PricingPageComponent,
     ProjectsPageComponent,
     ProjectPageComponent,
+    PayAccessModalComponent,
     AddProjectModalComponent,
     AddArticlesModalComponent,
     EditArticleModalComponent,

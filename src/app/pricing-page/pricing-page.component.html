@@ -7,12 +7,34 @@
 </header>
 
 <div class="row">
+  <div class="account">
+    <h2>Account: Free</h2>
+    <p>Expiration Date: 05 Sep, 2022</p>
+  </div>
+</div>
+
+<div class="row">
+  <ul class="pricings">
+    <li>
+      <h3>Weekly Access</h3>
+      <h6>Price: $25.00</h6>
+      <button class="button primary" (click)="buyWeeklyAccess()">Buy Now</button>
+    </li>
+    <li>
+      <h3>Monthly Access</h3>
+      <h6>Price: $80.00</h6>
+      <button class="button primary" (click)="buyMonthlyAccess()">Buy Now</button>
+    </li>
+  </ul>
+</div>
+
+<!-- <div class="row">
   <form novalidate (ngSubmit)="goPay()" [formGroup]="stripeTest">
     <ngx-stripe-card [options]="cardOptions"></ngx-stripe-card>
     <button type="submit">GO</button>
   </form>
 </div>
-
+ -->
 
 <!-- 
 <form novalidate (ngSubmit)="goPay()" [formGroup]="stripeTest">
@@ -20,3 +42,5 @@
   <ngx-stripe-card [options]="cardOptions"></ngx-stripe-card>
   <button type="submit">GO</button>
 </form> -->
+
+<pay-access-modal #payAccessModal></pay-access-modal>

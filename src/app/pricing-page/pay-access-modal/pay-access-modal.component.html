@@ -1,0 +1,17 @@
+<div class="modal" *ngIf="show">
+  <div class="modal-bg" (click)="close()"></div>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>Buy {{ type }} Access: {{ type === 'Weekly' ? '$25.00' : '$80.00' }}</h2>
+      <p>Enter your card details as payment type.</p>
+      <a class="close" (click)="close()"></a>
+    </div>
+    <div class="modal-body">
+      <ngx-stripe-card [options]="cardOptions"></ngx-stripe-card>
+    </div>
+    <div class="modal-foot">
+      <button class="button" (click)="close()">Cancel</button>
+      <button class="button primary" (click)="buy()" [class.loading]="loading" [disabled]="loading">Buy Access</button>
+    </div>
+  </div>
+</div>

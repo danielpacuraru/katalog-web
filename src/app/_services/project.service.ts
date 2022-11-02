@@ -44,4 +44,9 @@ export class ProjectService {
       .delete<void>(`${environment.apiUrl}/projects/${id}`);
   }
 
+  public resync(id: string): Observable<void> {
+    return this.http
+      .post<void>(`${environment.apiUrl}/projects/${id}/articles/resync`, { });
+  }
+
 }
