@@ -52,6 +52,7 @@ export class PayAccessModalComponent {
 
   close(): void {
     this.show = false;
+    this.error = '';
     this.loading = false;
   }
 
@@ -66,11 +67,12 @@ export class PayAccessModalComponent {
       .subscribe((result) => {
         if(result.paymentMethod) {
           const peymentMethodId = result.paymentMethod.id;
+          const productId = this.type === 'Weekly' ? environment.weeklyAccessId : environment.monthlyAccessId;
           this.authService
-            .pay(peymentMethodId)
+            .pay(peymentMethodId, productId)
             .subscribe((data: any) => {
               console.log(data);
-              this.loading = false;
+              this.close();
             }, (err) => {
               this.error = 'Card declined!';
               this.loading = false;

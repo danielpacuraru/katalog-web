@@ -46,9 +46,9 @@ export class AuthService {
     this.router.navigateByUrl('/login');
   }
 
-  public pay(paymentMethodId: string) {
+  public pay(paymentMethodId: string, productId: string) {
     return this.http
-      .post(`${environment.apiUrl}/pay`, { paymentMethodId });
+      .post(`${environment.apiUrl}/pay`, { paymentMethodId, productId });
   }
 
 }
