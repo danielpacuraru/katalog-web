@@ -1,4 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { User, UserAccount } from '../_models/auth';
 
 @Component({
   selector: 'pricing-page',
@@ -6,6 +9,17 @@ import { Component, ViewChild } from '@angular/core';
   styleUrls: ['./pricing-page.component.less']
 })
 export class PricingPageComponent {
+
+  user: User;
+
+  constructor(
+    private route: ActivatedRoute
+  ) {
+    if(this.route.parent) { 
+      this.user = this.route.parent.snapshot.data.user;
+    }
+    console.log(this.user);
+  }
 
   @ViewChild('payAccessModal') payAccessModal: any;
 
