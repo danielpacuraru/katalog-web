@@ -69,25 +69,6 @@
   </ul>
 </div>
 
-<!-- <ul class="file-system">
-  <li *ngFor="let group of sitemap2 | keyvalue">
-    <p>{{ group.key }}</p>
-    <ul>
-      <li *ngFor="let art of $any(group).value">{{ art.name }}</li>
-    </ul>
-  </li>
-</ul> -->
-
-<!-- <h1>Error</h1>
-<ng-container *ngFor="let article of articles">
-  <p *ngIf="article.status === articleStatus.ERROR">{{ article.code }}</p>
-</ng-container>
-
-<h1>Partial</h1>
-<ng-container *ngFor="let article of articles">
-  <p *ngIf="article.status === articleStatus.SUCCESS && isArticlePartial(article)">{{ article.code }}</p>
-</ng-container> -->
-
 <ul class="articles">
   <li *ngFor="let article of articles">
 
@@ -160,7 +141,7 @@
         <p>{{ article.code }}</p>
         <h5 class="article-pill error">ERROR</h5>
         <nav class="article-actions">
-          <a>
+          <a (click)="deleteArticle(article)">
             <svg viewBox="0 0 16 16" width="16" height="16">
               <path fill="#2D3E4D" fill-rule="evenodd" d="M1.686 1.686a1.49 1.49 0 0 0 0 2.105L5.895 8l-4.209 4.209a1.49 1.49 0 0 0 0 2.105 1.49 1.49 0 0 0 2.105 0L8 10.105l4.209 4.209a1.49 1.49 0 0 0 2.105 0 1.49 1.49 0 0 0 0-2.105L10.105 8l4.209-4.209a1.49 1.49 0 0 0 0-2.105 1.49 1.49 0 0 0-2.105 0L8 5.895 3.791 1.686a1.49 1.49 0 0 0-2.105 0z"/>
             </svg>

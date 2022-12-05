@@ -116,8 +116,8 @@ export class ProjectPageComponent implements OnDestroy {
   private _deleteArticle(article: Article): void {
     this.articleService
       .delete(article.id, this.project.id)
-      .subscribe((data: Article) => {
-        this.articles = this.articles.filter((article: Article) => article.id !== data.id);
+      .subscribe(() => {
+        this.articles = this.articles.filter((a: Article) => a.id !== article.id);
       });
   }
 
