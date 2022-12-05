@@ -16,21 +16,17 @@
       </svg>
       <span>Build project</span>
     </button>
-    <button class="button" (click)="resyncProject()">
-      <svg viewBox="0 0 16 18" width="16" height="18">
-        <path fill="#fff" fill-rule="evenodd" d="M4 9a2 2 0 1 1-4 0 2 2 0 1 1 4 0zm6 0a2 2 0 1 1-4 0 2 2 0 1 1 4 0zm4 2a2 2 0 1 0 0-4 2 2 0 1 0 0 4z"/>
-      </svg>
-    </button>
-    <!-- <div class="dropdown">
+    <div class="dropdown">
       <button class="button" dropdown>
         <svg viewBox="0 0 16 18" width="16" height="18">
           <path fill="#fff" fill-rule="evenodd" d="M4 9a2 2 0 1 1-4 0 2 2 0 1 1 4 0zm6 0a2 2 0 1 1-4 0 2 2 0 1 1 4 0zm4 2a2 2 0 1 0 0-4 2 2 0 1 0 0 4z"/>
         </svg>
       </button>
       <nav>
-        <a>Delete Project</a>
+        <a (click)="copyCodes()">Copy Missing Codes</a>
+        <a (click)="deleteProject()">Delete Project</a>
       </nav>
-    </div> -->
+    </div>
   </div>
 </header>
 
@@ -193,3 +189,4 @@
 <add-articles-modal [projectId]="project.id" (create)="addArticles($event)" #addArticlesModal></add-articles-modal>
 <edit-article-modal #editArticleModal></edit-article-modal>
 <confirm #confirmDeleteArticle></confirm>
+<confirm #confirmDeleteProject></confirm>

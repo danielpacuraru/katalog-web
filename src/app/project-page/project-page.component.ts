@@ -27,6 +27,7 @@ export class ProjectPageComponent implements OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private clipboard: Clipboard,
     private projectService: ProjectService,
     private articleService: ArticleService,
     private catalogService: CatalogService
@@ -63,6 +64,7 @@ export class ProjectPageComponent implements OnDestroy {
   }
 
   @ViewChild('confirmDeleteArticle') confirmDeleteArticle: any;
+  @ViewChild('confirmDeleteProject') confirmDeleteProject: any;
 
   public get successCount(): number { return this.articles.filter(a => a.status === ArticleStatus.SUCCESS && a.group).length; }
   public get incompleteCount(): number { return this.articles.filter(a => a.status === ArticleStatus.SUCCESS && !a.group).length; }
@@ -105,30 +107,7 @@ export class ProjectPageComponent implements OnDestroy {
     this.projectService.download(this.project.id).subscribe(blob => FileSaver.saveAs(blob, filename));
   }
 
-  public deleteProject(): void {
-    this.projectService.delete(this.project.id).subscribe(() => this.router.navigate(['..'], { relativeTo: this.route }));
-  }
-
-  public resyncProject(): void {
-    this.projectService.resync(this.project.id).subscribe();
-  }
-
-  /*public updatedArticleId: string = '';
-
-  public updateArticle(group: string) {
-    this.articleService.update(group, this.updatedArticleId, this.project.id).subscribe();
-  }
-
-  public newArticles(articles: Article[]): void {
-
-    articles.forEach(a => this.articles.unshift(a));
-  }*/
-
   public deleteArticle(article: Article): void {
-    /*var result = confirm(`Are you sure you want to delete "${article.name}" ?`);
-    if(result) {
-      this.articleService.delete(article.id, this.project.id).subscribe(data => this.articles = this.articles.filter(a => a.id !== data.id));
-    }*/
     const title = 'Delete article?';
     const text = `Article: ${article.name}`;
     this.confirmDeleteArticle.open(title, text).then(() => this._deleteArticle(article), () => {});
@@ -140,6 +119,22 @@ export class ProjectPageComponent implements OnDestroy {
       .subscribe((data: Article) => {
         this.articles = this.articles.filter((article: Article) => article.id !== data.id);
       });
+  }
+
+  public copyCodes(): void {
+    const codes = this.articles.filter(a => a.status === ArticleStatus.ERROR).map(a => a.code);
+    const text = codes.join('\n');
+    this.clipboard.copy(text);
+  }
+
+  public deleteProject(): void {
+    const title = 'Delete project?';
+    const text = `This action cannot be undone!`;
+    this.confirmDeleteProject.open(title, text).then(() => this._deleteProject(), () => {});
+  }
+
+  private _deleteProject(): void {
+    this.projectService.delete(this.project.id).subscribe(() => this.router.navigate(['..'], { relativeTo: this.route }));
   }
 
 }
