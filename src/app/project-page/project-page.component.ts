@@ -7,7 +7,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { ProjectService } from '../_services/project.service';
 import { ArticleService } from '../_services/article.service';
 import { CatalogService } from '../_services/catalog.service';
-import { Project, Article, ArticleStatus, Catalog } from '../_models/project';
+import { Project, Article, ArticleStatus, Catalog, ProjectStatus } from '../_models/project';
 
 @Component({
   selector: 'project-page',
@@ -21,7 +21,6 @@ export class ProjectPageComponent implements OnDestroy {
   public catalog: Catalog | null = null;
   public articleStatus = ArticleStatus;
   public building: boolean = false;
-  public catalogSync: boolean = false;
   public active: boolean;
 
   constructor(
@@ -36,8 +35,7 @@ export class ProjectPageComponent implements OnDestroy {
     this.project = this.route.snapshot.data.project;
     this.articles = this.route.snapshot.data.articles;
     this.checkUpdates();
-
-    this.syncCatalog();
+    this.getCatalog();
     
   }
 
@@ -47,18 +45,16 @@ export class ProjectPageComponent implements OnDestroy {
 
   private syncCatalog(): void {
     if(!this.active) return;
-    this.catalogService
+
+    this.projectService
       .get(this.project.id)
-      .subscribe((catalog: Catalog) => {
-        this.catalog = catalog;
-        if(catalog?.status === 'QUEUE') {
-          this.catalogSync = true;
-          setTimeout(() => {
-            this.syncCatalog();
-          }, 2500);
+      .subscribe((project: Project) => {
+        this.project = project;
+        if(this.project.status === 'QUEUE') {
+          setTimeout(() => { this.syncCatalog(); }, 2500);
         }
         else {
-          this.catalogSync = false;
+          this.getCatalog();
         }
       });
   }
@@ -85,6 +81,12 @@ export class ProjectPageComponent implements OnDestroy {
     }
   }
 
+  private getCatalog(): void {
+    this.catalogService.get(this.project.id).subscribe((catalog: Catalog) => { this.catalog = catalog; });
+  }
+
+  public get catalogSync() { return this.project.status === ProjectStatus.QUEUE }
+
   public isArticlePartial(article: Article): boolean {
     return !article.group;
   }
@@ -95,16 +97,11 @@ export class ProjectPageComponent implements OnDestroy {
   }
 
   public buildProject(): void {
-    this.catalogSync = true;
-
+    this.catalog = null;
+    this.project.status = ProjectStatus.QUEUE;
     this.catalogService
       .build(this.project.id)
       .subscribe(() => this.syncCatalog());
-  }
-
-  public downloadProject(): void {
-    const filename = this.project.name + '.zip';
-    this.projectService.download(this.project.id).subscribe(blob => FileSaver.saveAs(blob, filename));
   }
 
   public deleteArticle(article: Article): void {

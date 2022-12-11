@@ -30,7 +30,7 @@
   </div>
 </header>
 
-<div class="catalog" *ngIf="catalog && catalog?.status === 'READY'">
+<div class="catalog" *ngIf="catalog">
   <div class="copy">
     <input type="text" readonly [(ngModel)]="catalog.url">
     <button class="button" [cdkCopyToClipboard]="catalog.url">Copy</button>
