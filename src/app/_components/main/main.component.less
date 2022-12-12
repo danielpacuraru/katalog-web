@@ -5,6 +5,7 @@
   padding:0 16px;
   box-sizing: border-box;
   box-shadow: 0 1px 1px fade(black, 15%);
+  position: relative;
   user-select: none;
 }
 
@@ -71,3 +72,77 @@
   text-align: center;
   color: white;
 }
+
+.profile {
+  background: white;
+  width: 240px;
+  box-shadow: 0 1px 5px -1px fade(black, 25%);
+  position: absolute;
+  z-index: 100;
+  right: 5px;
+  top: 75px;
+  transition: transform 0.12s 0s ease-out, opacity 0.12s 0s ease-out, visibility 0s 0s linear;
+}
+
+.user:not(.active) + .profile {
+  transform: translateY(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.12s 0s ease-out, opacity 0.12s 0s ease-out, visibility 0s 0.12s linear;
+}
+
+.profile-head {
+  padding: 16px 16px 12px;
+}
+
+.profile h4 {
+  overflow: hidden;
+  font: 600 20px/28px var(--font);
+  color: #2D3E4D;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.profile p {
+  overflow: hidden;
+  font: 15px/20px var(--font);
+  color: #2D3E4D;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.profile hr {
+  background: #ADB1B4;
+  width: 100%;
+  height: 1px;
+  margin: 20px auto 0;
+}
+
+.profile nav {
+  padding: 8px;
+}
+
+.profile nav a {
+  padding: 8px;
+  border-radius: 4px;
+  display: block;
+  cursor: pointer;
+  font: 15px/20px var(--font);
+  color: #2D3E4D;
+  text-decoration: none;
+  transition: all 0.12s ease-out;
+}
+
+.profile nav a:hover {
+  background: #EEF0F0;
+  color: black;
+}
+
+
+
+
+
+
+
+
+

@@ -21,7 +21,19 @@
         </svg>
       </a>
     </nav>
-    <div class="user">{{ userShort }}</div>
+    <button class="user" dropdown>{{ userShort }}</button>
+    <div class="profile">
+      <div class="profile-head">
+        <h4>{{ user.name }}</h4>
+        <p>{{ user.email }}</p>
+        <hr>
+      </div>
+      <nav>
+        <a routerLink="/pricing">Pricing</a>
+        <a>Support</a>
+        <a (click)="logout()">Logout</a>
+      </nav>
+    </div>
   </div>
 </header>
 
