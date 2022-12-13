@@ -36,7 +36,6 @@ export class ProjectPageComponent implements OnDestroy {
     this.articles = this.route.snapshot.data.articles;
     this.checkUpdates();
     this.getCatalog();
-    
   }
 
   ngOnDestroy() {

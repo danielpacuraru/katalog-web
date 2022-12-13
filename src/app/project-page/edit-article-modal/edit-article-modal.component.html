@@ -7,8 +7,102 @@
       </div>
     </div>
     <div class="modal-article-body">
+      <p>{{ article.code }}</p>
       <h2>{{ article.name }}</h2>
-      <p>{{ article.code }} - {{ article.group }}</p>
+      <fieldset>
+        <select [(ngModel)]="group">
+          <option value="411">411 - Kabelføring</option>
+          <option value="412">412 - Systemer for jording</option>
+          <option value="413">413 - Systemer for lynvern</option>
+          <option value="414">414 - El-bil</option>
+          <option value="419">419 - Andre basisinstallasjoner for elkraft</option>
+          <option value="421">421 - Fordelingssystemer</option>
+          <option value="422">422 - Fordelingskabler</option>
+          <option value="429">429 - Andre deler for høyspent forsyning</option>
+          <option value="431">431 - Systemer for elkraftinntak</option>
+          <option value="432">432 - Systemer for hovedfordeling</option>
+          <option value="433">433 - Underfordeling. Elkraftfordeling til alminnelig forbruk</option>
+          <option value="434">434 - Elkraftfordeling til driftstekniske installasjoner</option>
+          <option value="435">435 - Elkraftfordeling til virksomhet</option>
+          <option value="439">439 - Andre deler for lavspent forsyning</option>
+          <option value="442">442 - Belysningsutstyr</option>
+          <option value="443">443 - Nødlysutstyr</option>
+          <option value="449">449 - Andre deler for installasjon til lys</option>
+          <option value="452">452 - Varmeovner</option>
+          <option value="453">453 - Varmeelementer for innebygging</option>
+          <option value="454">454 - Varmekabler</option>
+          <option value="455">455 - Vannvarmere og elektrokjeler</option>
+          <option value="459">459 - Annen elvarme</option>
+          <option value="463">463 - Akkumulatoranlegg</option>
+          <option value="469">469 - Andre deler</option>
+          <option value="511">511 - Systemer for kabelføring</option>
+          <option value="512">512 - Jording</option>
+          <option value="514">514 - Inntakskabler for teleanlegg</option>
+          <option value="515">515 - Telefordelinger</option>
+          <option value="519">519 - Andre generelle anlegg for tele og automatisering</option>
+          <option value="521">521 - Kabling for IKT</option>
+          <option value="532">532 - Systemer for telefoni</option>
+          <option value="534">534 - Systemer for porttelefoner</option>
+          <option value="535">535 - Systemer for høyttalende hustelefoner</option>
+          <option value="536">536 - Systemer for personsøkning</option>
+          <option value="539">539 - Andre installasjoner for telefoni og personsøkning</option>
+          <option value="542">542 - Brannalarm</option>
+          <option value="543">543 - Adgangskontroll, innbrudds- og overfallsalarm</option>
+          <option value="544">544 - Pasientsignal</option>
+          <option value="545">545 - Uranlegg og tidsregistrering</option>
+          <option value="547">547 - Dørsystem</option>
+          <option value="549">549 - Andre installasjoner for alarm og signal</option>
+          <option value="552">552 - Fellesantenne</option>
+          <option value="553">553 - Internfjernsyn</option>
+          <option value="554">554 - Lyddistribusjonsanlegg</option>
+          <option value="555">555 - Lydanlegg</option>
+          <option value="556">556 - Bilde og AV-utstyr</option>
+          <option value="559">559 - Annen installasjon for lyd og bilde</option>
+          <option value="562">562 - Sentral driftskontroll og automatisering</option>
+          <option value="563">563 - Lokal automatisering</option>
+          <option value="564">564 - Buss-systemer</option>
+          <option value="565">565 - FDVUS: Administrativt system</option>
+          <option value="569">569 - Andre installasjoner for automatisering</option>
+          <option value="571">571 - Kabling for instrumentering</option>
+          <option value="572">572 - Instrumentering for måling av mengde</option>
+          <option value="573">573 - Instrumentering for måling av trykk</option>
+          <option value="574">574 - Instrumentering for måling av temperatur</option>
+          <option value="575">575 - Instrumentering for måling av lengde</option>
+          <option value="576">576 - Instrumentering for måling av vekt</option>
+          <option value="577">577 - Instrumentering for måling av elektriske størrelser</option>
+          <option value="578">578 - Instrumentering for analyse</option>
+          <option value="579">579 - Annen instrumentering</option>
+          <option value="731">731 - Utendørs VA</option>
+          <option value="732">732 - Utendørs varme</option>
+          <option value="733">733 - Utendørs brannslokking</option>
+          <option value="734">734 - Utendørs gassinstallasjon</option>
+          <option value="735">735 - Utendørs kjøling for idrettsbaner</option>
+          <option value="736">736 - Utendørs luftbehandlingsanlegg</option>
+          <option value="737">737 - Utendørs forsyningsanlegg for termisk energi</option>
+          <option value="738">738 - Utendørs fontener og springvann</option>
+          <option value="739">739 - Annen utendørs VVS</option>
+          <option value="742">742 - Utendørs høyspent forsyning</option>
+          <option value="743">743 - Utendørs lavspent forsyning</option>
+          <option value="744">744 - Utenførs lys</option>
+          <option value="745">745 - Utendørs elvarme</option>
+          <option value="746">746 - Utendørs reservekraft</option>
+          <option value="749">749 - Annen utendørs elkraft</option>
+          <option value="752">752 - Utendørs integrert kommunikasjon</option>
+          <option value="753">753 - Utendørs telefoni og personsøkning</option>
+          <option value="754">754 - Utendørs alarm og signal</option>
+          <option value="755">755 - Utendørs lyd og bilde</option>
+          <option value="756">756 - Utendørs automatisering</option>
+          <option value="759">759 - Andre installasjoner for  utendørs tele og automatisering</option>
+          <option value="801">801 - Verktøy</option>
+        </select>
+        <ul class="errors">
+          <li *ngIf="error">Group is required.</li>
+        </ul>
+      </fieldset>
+    </div>
+    <div class="modal-article-foot">
+      <button class="button" (click)="close()">Cancel</button>
+      <button class="button primary" (click)="save()" [class.loading]="loading" [disabled]="loading">Save Changes</button>
     </div>
   </div>
 </div>
