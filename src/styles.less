@@ -82,7 +82,7 @@ svg {
 }
 
 .button {
-  background: #ADB1B4;
+  background: #777C80;
   padding: 9px 16px 7px;
   border-radius: 4px;
   display: inline-block;
@@ -93,22 +93,53 @@ svg {
   font: 600 15px/20px 'Proxima';
   color: white;
   text-decoration: none;
+  transition: all 0.12s ease-out;
+
+  &:hover {
+    background: #92979A;
+    box-shadow: 0 2px 4px fade(black, 8%), 0 0 2px fade(black, 8%);
+  }
+
+  &:active {
+    background: #92979A;
+    box-shadow: 0 4px 6px fade(black, 16%), 0 0 2px fade(black, 12%);
+  }
 }
 
 .button.primary {
   background: #655AA8;
+
+  &:hover,
+  &:active {
+    background: #826FD1;
+  }
 }
 
 .button.success {
-  background: #5EA653;
+  background: #47963B;
+
+  &:hover,
+  &:active {
+    background: #4DB142;
+  }
 }
 
 .button.warning {
-  background: #E07338;
+  background: #E6A228;
+
+  &:hover,
+  &:active {
+    background: #F9AA38;
+  }
 }
 
 .button.danger {
-  background: #F33F51;
+  background: #D6364E;
+
+  &:hover,
+  &:active {
+    background: #F33F51;
+  }
 }
 
 .button[disabled] {
