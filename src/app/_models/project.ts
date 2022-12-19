@@ -2,8 +2,14 @@ export interface Project {
   id: string,
   name: string,
   articles: number,
+  options: ProjectOptions,
   status: ProjectStatus,
   createdAt: Date
+}
+
+export interface ProjectOptions {
+  docsFormat: string,
+  showManuals: boolean
 }
 
 export enum ProjectStatus {

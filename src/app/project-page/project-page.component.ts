@@ -133,4 +133,9 @@ export class ProjectPageComponent implements OnDestroy {
     this.projectService.delete(this.project.id).subscribe(() => this.router.navigate(['..'], { relativeTo: this.route }));
   }
 
+  public updateProject(project: Project): void {
+    this.project.name = project.name;
+    this.project.options = project.options;
+  }
+
 }

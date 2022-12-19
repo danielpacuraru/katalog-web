@@ -81,6 +81,26 @@ svg {
   to { transform: rotate(360deg); }
 }
 
+.btn {
+  background: white;
+  padding: 9px 16px 7px;
+  border: 1px solid #C8CCCE;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  font: 600 15px/20px 'Proxima';
+  color: #2D3E4D;
+  text-decoration: none;
+  transition: all 0.12s ease-out;
+
+  &:hover {
+    background: #E2F1F8;
+  }
+}
+
 .button {
   background: #777C80;
   padding: 9px 16px 7px;
@@ -233,8 +253,12 @@ fieldset {
   position: relative;
 }
 
-fieldset label {
-  margin-bottom: 3px;
+fieldset + fieldset {
+  margin-top: 30px;
+}
+
+fieldset > label:first-child {
+  margin-bottom: 10px;
   display: block;
   font: 14px/20px var(--font);
   color: #4B5C6A;
@@ -248,6 +272,17 @@ fieldset input {
   box-sizing: border-box;
   display: block;
   font: 15px var(--font);
+  color: #2D3E4D;
+}
+
+fieldset input.lg {
+  width: 100%;
+  padding: 9px 10px 7px;
+  border: 1px solid #C8CCCE;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: block;
+  font: 500 18px var(--font);
   color: #2D3E4D;
 }
 
@@ -293,7 +328,44 @@ fieldset select + .errors {
   display: block;
 }
 
+fieldset .checkbox {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
 
+fieldset .checkbox input {
+  width: 0;
+  height: 0;
+  position: absolute;
+  opacity: 0;
+}
+
+fieldset .checkbox div {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #C8CCCE;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+fieldset .checkbox input:checked + div {
+  background: #2DA3C3 url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTUuNiA3LjkzM0wzLjczNCA2LjA2N2wtMS40IDEuNEw1LjYgMTAuNzMzbDYuMDY3LTYuMDY3LTEuNC0xLjRMNS42IDcuOTMzeiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==') no-repeat center;
+  border-color: transparent;
+}
+
+fieldset .checkbox span {
+  display: inline-block;
+  vertical-align: middle;
+  font: 15px var(--font);
+  color: #2D3E4D;
+}
 
 
 
@@ -333,6 +405,7 @@ fieldset select + .errors {
 }
 
 .head h1 {
+  margin-right: 12px;
   display: inline-block;
   vertical-align: middle;
   font: bold 32px/36px var(--font);

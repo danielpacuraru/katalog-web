@@ -29,6 +29,11 @@ export class ProjectService {
       .post<Project>(`${environment.apiUrl}/projects`, { name });
   }
 
+  public update(obj: any, id: string): Observable<Project> {
+    return this.http
+      .put<Project>(`${environment.apiUrl}/projects/${id}`, obj);
+  }
+
   public build(id: string): Observable<any> {
     return this.http
       .post<any>(`${environment.apiUrl}/projects/${id}/catalog`, { });

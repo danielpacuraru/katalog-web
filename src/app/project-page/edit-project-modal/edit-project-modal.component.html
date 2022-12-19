@@ -1,0 +1,35 @@
+<div class="modal" *ngIf="show">
+  <div class="modal-bg" (click)="close()"></div>
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>Edit Project</h2>
+      <p>Edit project info and catalog settings.</p>
+      <a class="close" (click)="close()"></a>
+    </div>
+    <div class="modal-body">
+      <fieldset>
+        <label>Project Name</label>
+        <input class="lg" [(ngModel)]="name">
+      </fieldset>
+      <fieldset>
+        <label>Catalog Naming Format</label>
+        <select [(ngModel)]="docsFormat">
+          <option value="[GROUP]_[CODE]_[NAME]">[GROUP]_[CODE]_[NAME]</option>
+          <option value="[GROUP].[INC] - [NAME]">[GROUP].[INC] - [NAME]</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <label>Include Brukermanual Folder</label>
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="showManuals" />
+          <div></div>
+          <span>Show Brukermanual Folder</span>
+        </label>
+      </fieldset>
+    </div>
+    <div class="modal-foot">
+      <button class="button" (click)="close()">Cancel</button>
+      <button class="button primary" [class.loading]="loading" [disabled]="loading" (click)="submit()">Edit Project</button>
+    </div>
+  </div>
+</div>

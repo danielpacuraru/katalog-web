@@ -32,9 +32,6 @@ export class AddArticlesModalComponent {
   public submit(): void {
     const codes = this.textToList(this.text);
 
-    // this.articleService.create(['2456337', '1228195', '6200523'], '63209a60c7fb66d1cba4bb1e').subscribe();
-    // this.articleService.create(['2456337', '1228195', '8830486'], '63209a60c7fb66d1cba4bb1e').subscribe();
-
     this.articleService
       .create(codes, this.projectId)
       .subscribe((articles: Article[]) => {

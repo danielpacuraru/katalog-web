@@ -22,6 +22,7 @@ import { PayAccessModalComponent } from './pricing-page/pay-access-modal/pay-acc
 import { AddProjectModalComponent } from './projects-page/add-project-modal/add-project-modal.component';
 import { AddArticlesModalComponent } from './project-page/add-articles-modal/add-articles-modal.component';
 import { EditArticleModalComponent } from './project-page/edit-article-modal/edit-article-modal.component';
+import { EditProjectModalComponent } from './project-page/edit-project-modal/edit-project-modal.component';
 
 import { ConfirmComponent } from './_components/confirm/confirm.component';
 import { DropdownDirective } from './_helpers/dropdown.directive';
@@ -40,6 +41,7 @@ import { BytesPipe } from './_helpers/bytes.pipe';
     AddProjectModalComponent,
     AddArticlesModalComponent,
     EditArticleModalComponent,
+    EditProjectModalComponent,
     CatalogPageComponent,
     ConfirmComponent,
     DropdownDirective,
